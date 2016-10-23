@@ -17,6 +17,7 @@ namespace WindowsProgramingHomework8.FileSearch {
 
         private CancellationTokenSource cancelToken;
         private string extension;
+        private bool started;
         private bool paused;
         private object syncObj = new object();        
 
@@ -25,6 +26,11 @@ namespace WindowsProgramingHomework8.FileSearch {
             this.cancelToken = new CancellationTokenSource();
         }
         public void RunSearch() {
+            if (started)
+                throw new InvalidOperationException(
+                    "A task can't be started more than once." + Environment.NewLine
+                    + "If you need to run it again, use a new instance to do so.");
+            started = true;
             Task.Run(() => Search(), cancelToken.Token);
         }
         public void Pause() {
