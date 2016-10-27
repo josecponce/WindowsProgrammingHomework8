@@ -14,6 +14,7 @@ namespace WindowsProgramingHomework8.Dialogs
       public partial class TextOptionsDialog : Form
     {
         TextsDocument document;
+        private double fontSize;
         public TextOptionsDialog(TextsDocument doc)
         {
             InitializeComponent();
@@ -29,6 +30,8 @@ namespace WindowsProgramingHomework8.Dialogs
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     this.fontTextBox.Text = dlg.Font.Name;
+                    this.fontTextBox.Font = new Font(dlg.Font.Name, (float)8.0, dlg.Font.Style);
+                    fontSize = dlg.Font.Size;
                 }
             }
 
@@ -36,6 +39,33 @@ namespace WindowsProgramingHomework8.Dialogs
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
+            try
+            {
+                float x = 0;
+                float.TryParse(locationTextBox.Text.Split(',')[0], out x);
+                float y = 0;
+                float.TryParse(locationTextBox.Text.Split(',')[1], out y);
+                double rot;
+                double.TryParse(rotationTextBox.Text, out rot);
+
+                document.Texts.ElementAt(textsComboBox.SelectedIndex).Font = new Font(fontTextBox.Font.Name, (float)fontSize, fontTextBox.Font.Style);
+
+                //Need fix
+                document.Texts.ElementAt(textsComboBox.SelectedIndex).Location = new PointF(x, y);
+
+                document.Texts.ElementAt(textsComboBox.SelectedIndex).Rotation = rot;
+
+                document.Texts.ElementAt(textsComboBox.SelectedIndex).TextToDraw = textToDrawTextBox.Text;
+
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+            this.Owner.Refresh();
             this.Close();
         }
 
@@ -76,6 +106,34 @@ namespace WindowsProgramingHomework8.Dialogs
 
         private void buttonApply_Click(object sender, EventArgs e)
         {
+
+            try
+            {
+                float x = 0;
+                float.TryParse(locationTextBox.Text.Split(',')[0], out x);
+                float y = 0;
+                float.TryParse(locationTextBox.Text.Split(',')[1], out y);
+                double rot;
+                double.TryParse(rotationTextBox.Text,out rot);
+
+
+                document.Texts.ElementAt(textsComboBox.SelectedIndex).Font = new Font(fontTextBox.Font.Name, (float)fontSize, fontTextBox.Font.Style);
+
+                //Need fix
+                document.Texts.ElementAt(textsComboBox.SelectedIndex).Location = new PointF(x,y);
+
+                document.Texts.ElementAt(textsComboBox.SelectedIndex).Rotation = rot;
+
+                document.Texts.ElementAt(textsComboBox.SelectedIndex).TextToDraw = textToDrawTextBox.Text;
+
+
+            }
+            catch (Exception ex)
+            {
+                
+            }
+
+            this.Owner.Refresh();
 
         }
     }

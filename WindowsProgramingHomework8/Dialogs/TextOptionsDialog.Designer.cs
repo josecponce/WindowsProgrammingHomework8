@@ -104,6 +104,7 @@
             // 
             this.textsComboBox.DataSource = this.textsBindingSource;
             this.textsComboBox.DisplayMember = "TextToDraw";
+            this.textsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.textsComboBox.FormattingEnabled = true;
             this.textsComboBox.Location = new System.Drawing.Point(22, 50);
             this.textsComboBox.Name = "textsComboBox";
@@ -117,6 +118,7 @@
             this.fontTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.textsBindingSource, "Font", true));
             this.fontTextBox.Location = new System.Drawing.Point(91, 114);
             this.fontTextBox.Name = "fontTextBox";
+            this.fontTextBox.ReadOnly = true;
             this.fontTextBox.Size = new System.Drawing.Size(129, 22);
             this.fontTextBox.TabIndex = 2;
             // 
@@ -245,6 +247,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "TextOptionsDialog";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Text Options";
             ((System.ComponentModel.ISupportInitialize)(this.textsDocumentBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textsBindingSource)).EndInit();
