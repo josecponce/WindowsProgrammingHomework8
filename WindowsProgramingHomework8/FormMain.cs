@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Homework3ControlLib;
+using Homework7;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,11 +9,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsProgramingHomework8.Entities;
 
 namespace WindowsProgramingHomework8 {
-    public partial class Form1 : Form {
-        public Form1() {
+    public partial class FormMain:Form
+    {
+        public FormMain()
+        {
             InitializeComponent();
+        }
+
+        private void textOptionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

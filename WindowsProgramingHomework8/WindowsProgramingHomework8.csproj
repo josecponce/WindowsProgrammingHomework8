@@ -46,16 +46,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Text.cs" />
-    <Compile Include="FileSearch\FileSearcher.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Dialogs\TextOptionsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Dialogs\TextOptionsDialog.Designer.cs">
+      <DependentUpon>TextOptionsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Text.cs" />
+    <Compile Include="Entities\TextDocument.cs" />
+    <Compile Include="FileSearch\FileSearcher.cs" />
+    <Compile Include="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Dialogs\TextOptionsDialog.resx">
+      <DependentUpon>TextOptionsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -65,6 +78,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Properties\DataSources\WindowsProgramingHomework8.Entities.TextsDocument.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -77,6 +91,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Homework3ControlLib\Homework3ControlLib.csproj">
+      <Project>{43F5C23A-E612-4A2E-88AD-8F83DA540CA0}</Project>
+      <Name>Homework3ControlLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Homework7\Homework7.csproj">
+      <Project>{C48E21F7-4384-41F2-8A36-3C3B8979FECC}</Project>
+      <Name>Homework7</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

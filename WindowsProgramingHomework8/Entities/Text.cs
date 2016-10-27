@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -7,12 +8,20 @@ using System.Threading.Tasks;
 
 namespace WindowsProgramingHomework8.Entities
 {
-    public class Text
+    [Serializable]
+    public class Text : INotifyPropertyChanged, ICloneable
     {
         private string textToDraw;
         private PointF location;
         private Font font;
         private double rotation;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnChange(string propName)
+        {
+            PropertyChanged?.Invoke
+                (this, new PropertyChangedEventArgs(propName));
+        }
 
         public Text(string text, PointF location, Font font, double rotation)
         {
@@ -32,6 +41,8 @@ namespace WindowsProgramingHomework8.Entities
             set
             {
                 textToDraw = value;
+                OnChange(nameof(TextToDraw));
+
             }
         }
 
@@ -45,6 +56,7 @@ namespace WindowsProgramingHomework8.Entities
             set
             {
                 location = value;
+                OnChange(nameof(Location));
             }
         }
 
@@ -58,6 +70,7 @@ namespace WindowsProgramingHomework8.Entities
             set
             {
                 font = value;
+                OnChange(nameof(Font));
             }
         }
 
@@ -71,7 +84,13 @@ namespace WindowsProgramingHomework8.Entities
             set
             {
                 rotation = value;
+                OnChange(nameof(Rotation));
             }
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }
