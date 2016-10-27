@@ -44,5 +44,11 @@ namespace WindowsProgramingHomework8 {
             TextOptionsDialog pForm = new TextOptionsDialog(this.document);
             pForm.Show(this);
         }
+
+
+        private void searchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
