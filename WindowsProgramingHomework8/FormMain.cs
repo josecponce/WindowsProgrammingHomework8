@@ -1,5 +1,7 @@
 ﻿using Homework3ControlLib;
 using Homework7;
+using Microsoft.Practices.Unity;
+using SingleInstanceApplicationLib;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,17 +15,29 @@ using WindowsProgramingHomework8.Dialogs;
 using WindowsProgramingHomework8.Entities;
 
 namespace WindowsProgramingHomework8 {
-    public partial class FormMain:Form
-    {
-        private TextsDocument document;
-        public FormMain(string fileName = null)
-        {
-            InitializeComponent();
-            if (fileName == null)
-            {
-                document = new TextsDocument();
-            }
+    public partial class FormMain : TopLevelForm<TextsDocument> {
 
+        public override ToolStripMenuItem WindowsMenu =>
+            windowsToolStripMenuItem;
+        protected override bool unsavedChanges => document.Dirty;
+
+        public FormMain(IUnityContainer container, IDocumentRepository<TextsDocument> repository) 
+            : base(container, repository) {
+            InitializeComponent();
+        }
+        protected override void Initialize(string fileName) {
+            base.Initialize(fileName);
+            //setting handlers from parent class because designer won't do it for some unamusing reason
+            newToolStripMenuItem.Click += newToolStripMenuItem_Click;
+            openToolStripMenuItem.Click += openToolStripMenuItem_Click;
+            saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
+            saveAsToolStripMenuItem.Click += saveAsToolStripMenuItem_Click;
+            exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
+        }
+
+        protected override void saveFile(bool promptUser) {
+            base.saveFile(promptUser);
+            document.Dirty = false;        
         }
 
         private void textOptionsToolStripMenuItem_Click(object sender, EventArgs e)

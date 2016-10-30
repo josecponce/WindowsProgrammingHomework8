@@ -11,10 +11,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Homework3ControlLib {
-    public abstract partial class FormBase<T> : TopLevelForm<T> where T : new() {
+    public partial class FormBase<T> : TopLevelForm<T> where T : new() {
 
         private Point mouseDownLocation = Point.Empty;
 
+        public FormBase() { }
         public FormBase(IUnityContainer container, IDocumentRepository<T> repository) 
             : base(container, repository) {
             InitializeComponent();

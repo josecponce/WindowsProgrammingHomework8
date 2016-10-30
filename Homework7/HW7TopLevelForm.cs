@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Homework7 {
-    public partial class HW7TopLevelForm : FormBase<ShapesDocument> {
+    public partial class HW7TopLevelForm : TopLevelForm<ShapesDocument> {
         private Dialogs.AboutDialog aboutDialog;
         private Dialogs.OathDialog oathDialog;
 
@@ -39,6 +39,8 @@ namespace Homework7 {
             SetDefaultSelections();            
             StatusStripLabel.Text = this.fileName;
         }
+        public HW7TopLevelForm() { }
+
         public HW7TopLevelForm(IUnityContainer container, 
             IDocumentRepository<ShapesDocument> repository)
             : base(container, repository) {
@@ -69,6 +71,7 @@ namespace Homework7 {
         
         protected override void saveFile(bool promptUser) {
             base.saveFile(promptUser);
+            document.Dirty = false;
             StatusStripLabel.Text = fileName;
         }
         private void shapeToolStripMenuItem_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e) {
@@ -93,28 +96,28 @@ namespace Homework7 {
             (e.ClickedItem as ToolStripMenuItem).Checked = true;
         }
 
-        protected override void oathToolStripMenuItem_Click(object sender, EventArgs e) {
-            if (aboutDialog == null) {
-                oathDialog = new OathDialog();
-                oathDialog.StartPosition = FormStartPosition.Manual;
-                oathDialog.Location = new Point(this.Location.X + this.Width,
-                        this.Location.Y);
-                oathDialog.FormClosed += OathDialog_FormClosed;
-                oathDialog.Show(this);
-            }
-        }
+        //protected override void oathToolStripMenuItem_Click(object sender, EventArgs e) {
+        //    if (aboutDialog == null) {
+        //        oathDialog = new OathDialog();
+        //        oathDialog.StartPosition = FormStartPosition.Manual;
+        //        oathDialog.Location = new Point(this.Location.X + this.Width,
+        //                this.Location.Y);
+        //        oathDialog.FormClosed += OathDialog_FormClosed;
+        //        oathDialog.Show(this);
+        //    }
+        //}
 
-        protected override void aboutToolStripMenuItem_Click(object sender, EventArgs e) {
-            if (oathDialog == null) {
-                aboutDialog = new Dialogs.AboutDialog();
-                aboutDialog.StartPosition = FormStartPosition.Manual;
-                aboutDialog.Location = new Point(this.Location.X,
-                    this.Location.Y + this.Height);
-                aboutDialog.FormClosed += AboutDialog_FormClosed;
-                aboutDialog.Show(this);
-            }
+        //protected override void aboutToolStripMenuItem_Click(object sender, EventArgs e) {
+        //    if (oathDialog == null) {
+        //        aboutDialog = new Dialogs.AboutDialog();
+        //        aboutDialog.StartPosition = FormStartPosition.Manual;
+        //        aboutDialog.Location = new Point(this.Location.X,
+        //            this.Location.Y + this.Height);
+        //        aboutDialog.FormClosed += AboutDialog_FormClosed;
+        //        aboutDialog.Show(this);
+        //    }
 
-        }
+        //}
 
         private void AboutDialog_FormClosed(object sender, FormClosedEventArgs e) {
             aboutDialog = null;

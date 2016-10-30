@@ -7,20 +7,21 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SingleInstanceApplicationLib {
-    public abstract class TopLevelForm<T> : Form where T : new() {
+    public class TopLevelForm<T> : Form where T : new() {
         private IUnityContainer container;
         private IDocumentRepository<T> repository;
 
         protected T document;
         protected static int formCount = 0;       
                 
-        public abstract ToolStripMenuItem WindowsMenu { get; }
-        protected abstract bool unsavedChanges { get; }
+        public virtual ToolStripMenuItem WindowsMenu { get; }
+        protected virtual bool unsavedChanges { get; }
         protected virtual string fileFilter =>
             "Weird Text Files(*.wtxt)|*.wtxt|All files|*.*";
 
         protected string fileName;
 
+        public TopLevelForm() { }
         public TopLevelForm(IUnityContainer container, IDocumentRepository<T> repository) {
             formCount++;
             this.container = container;
