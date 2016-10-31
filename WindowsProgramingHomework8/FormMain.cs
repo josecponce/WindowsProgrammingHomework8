@@ -26,7 +26,16 @@ namespace WindowsProgramingHomework8 {
             InitializeComponent();
         }
         protected override void Initialize(string fileName) {
-            base.Initialize(fileName);
+            string extension = fileName.Substring(
+                fileName.LastIndexOf("."),
+                fileName.Length - fileName.LastIndexOf("."));
+            //if it's a new Doc or it has "our" binary extension, this is enough
+            if (fileName == null || extension == ".wtxt") {
+                base.Initialize(fileName);
+            }else {
+                //we need to create a way to deserialize other file types                
+            }
+            
             //setting handlers from parent class because designer won't do it for some unamusing reason
             newToolStripMenuItem.Click += newToolStripMenuItem_Click;
             openToolStripMenuItem.Click += openToolStripMenuItem_Click;
@@ -42,19 +51,9 @@ namespace WindowsProgramingHomework8 {
 
         private void textOptionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (Form f in Application.OpenForms)
-            {
-                if (f is TextOptionsDialog)
-                {
-                    if (f.WindowState == FormWindowState.Minimized)
-                        f.WindowState = FormWindowState.Normal;
-                    f.Focus();
-                    f.BringToFront();
-                    f.Focus();
-                    return;
-                }
+            if (bringToFrontIfExists<TextOptionsDialog>()) {
+                return;
             }
-
             TextOptionsDialog pForm = new TextOptionsDialog(this.document);
             pForm.Show(this);
         }
@@ -62,7 +61,25 @@ namespace WindowsProgramingHomework8 {
 
         private void searchToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (bringToFrontIfExists<SearchDialog>()) {
+                return;
+            }
+            SearchDialog searchDialog = new SearchDialog();
+            searchDialog.Show(this);
+        }
 
+        private bool bringToFrontIfExists<Q>() where Q : Form{
+            foreach (Form f in Application.OpenForms) {
+                if (f is Q) {
+                    if (f.WindowState == FormWindowState.Minimized)
+                        f.WindowState = FormWindowState.Normal;
+                    f.Focus();
+                    f.BringToFront();
+                    f.Focus();
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
