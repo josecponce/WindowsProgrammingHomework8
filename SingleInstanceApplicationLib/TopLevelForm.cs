@@ -32,11 +32,14 @@ namespace SingleInstanceApplicationLib {
 
         public static TopLevelForm<T> CreateTopLevelWindow(string fileName, IUnityContainer container){
             if (!string.IsNullOrEmpty(fileName)) {
-                foreach (TopLevelForm<T> openForm in Application.OpenForms) {
-                    if (string.Compare(openForm.fileName, fileName,
+                foreach (Form openForm in Application.OpenForms) {
+                    if (!(openForm is TopLevelForm<T>))
+                        continue;
+                    TopLevelForm<T> f = openForm as TopLevelForm<T>;
+                    if (string.Compare(f.fileName, fileName,
                         true) == 0) {
                         openForm.Activate();
-                        return openForm;
+                        return f;
                     }
                 }
             }

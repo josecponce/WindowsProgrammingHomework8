@@ -8,24 +8,25 @@ using System.Threading.Tasks;
 
 namespace SingleInstanceApplicationLib {
     public class DocumentRepository<T> : IDocumentRepository<T> where T : class{
-        private IFormatter formatter;
-
-        public DocumentRepository(IFormatter formatter) {
-            this.formatter = formatter;
+        
+        private IDictionary<string, IDocumentRepository<T>> repositories;
+        
+        public DocumentRepository(
+            IDictionary<string, IDocumentRepository<T>> repositories) {
+            this.repositories = repositories;            
         }
 
         public T LoadDocument(string path) {
-            T document = null;
-            using (Stream stream = File.OpenRead(path)) {
-                document = formatter.Deserialize(stream) as T;
-            }
+            string extension = path.Substring(
+                path.LastIndexOf("."),
+                path.Length - path.LastIndexOf("."));
+            T document = repositories[extension].LoadDocument(path);
             return document;
         }
 
         public void SaveDocument(T document, string path) {
-            using (Stream stream = File.OpenWrite(path)) {
-                formatter.Serialize(stream, document);
-            }
+            //always save in binary format, regardless of extension
+            repositories[".wtxt"].SaveDocument(document, path);
         }
     }
 }

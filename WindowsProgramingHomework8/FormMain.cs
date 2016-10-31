@@ -26,15 +26,7 @@ namespace WindowsProgramingHomework8 {
             InitializeComponent();
         }
         protected override void Initialize(string fileName) {
-            string extension = fileName.Substring(
-                fileName.LastIndexOf("."),
-                fileName.Length - fileName.LastIndexOf("."));
-            //if it's a new Doc or it has "our" binary extension, this is enough
-            if (fileName == null || extension == ".wtxt") {
-                base.Initialize(fileName);
-            }else {
-                //we need to create a way to deserialize other file types                
-            }
+            base.Initialize(fileName);
             
             //setting handlers from parent class because designer won't do it for some unamusing reason
             newToolStripMenuItem.Click += newToolStripMenuItem_Click;
