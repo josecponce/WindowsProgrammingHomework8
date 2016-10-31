@@ -20,7 +20,11 @@ namespace SingleInstanceApplicationLib {
             string extension = path.Substring(
                 path.LastIndexOf("."),
                 path.Length - path.LastIndexOf(".")).ToLower();
-            T document = repositories[extension].LoadDocument(path);
+            T document = null;
+            if (!repositories.ContainsKey(extension)) {
+                extension = ".txt";//assume plain text file if unrecognized extension
+            }
+            document = repositories[extension].LoadDocument(path);
             return document;
         }
 
