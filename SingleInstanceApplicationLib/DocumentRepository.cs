@@ -19,7 +19,7 @@ namespace SingleInstanceApplicationLib {
         public T LoadDocument(string path) {
             string extension = path.Substring(
                 path.LastIndexOf("."),
-                path.Length - path.LastIndexOf("."));
+                path.Length - path.LastIndexOf(".")).ToLower();
             T document = repositories[extension].LoadDocument(path);
             return document;
         }
