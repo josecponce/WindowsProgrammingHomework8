@@ -109,5 +109,10 @@ namespace WindowsProgramingHomework8 {
             g.DrawString(toDraw, font, brush, x, y);
 
         }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            ///Hello
+        }
     }
 }
