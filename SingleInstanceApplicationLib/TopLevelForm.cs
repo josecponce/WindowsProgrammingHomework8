@@ -1,12 +1,9 @@
 ﻿using Microsoft.Practices.Unity;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SingleInstanceApplicationLib {
+namespace SingleInstanceApplicationLib
+{
     public class TopLevelForm<T> : Form where T : new() {
         private IUnityContainer container;
         private IDocumentRepository<T> repository;
@@ -88,6 +85,8 @@ namespace SingleInstanceApplicationLib {
                 DialogResult result = dialog.ShowDialog();
                 if (result == DialogResult.OK) {
                     CreateTopLevelWindow(dialog.FileName, container);
+                    //opens new file, initializes document: 
+                    Initialize(dialog.FileName);
                 }
             }
         }
@@ -115,5 +114,22 @@ namespace SingleInstanceApplicationLib {
             repository.SaveDocument(document, fileName);
             this.Text = fileName;
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // TopLevelForm
+            // 
+            this.ClientSize = new System.Drawing.Size(282, 253);
+            this.Name = "TopLevelForm";
+            this.ResumeLayout(false);            
+
+        }
+
+       
+      
+
+
     }
 }

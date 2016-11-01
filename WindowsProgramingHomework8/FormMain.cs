@@ -34,6 +34,8 @@ namespace WindowsProgramingHomework8 {
             saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             saveAsToolStripMenuItem.Click += saveAsToolStripMenuItem_Click;
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
+            this.Paint += new System.Windows.Forms.PaintEventHandler(TopLevelForm_Paint); 
+
         }
 
         protected override void saveFile(bool promptUser) {
@@ -73,5 +75,41 @@ namespace WindowsProgramingHomework8 {
             }
             return false;
         }
+
+
+        //THIS IS TESTING , NEEDS TO BE MOVED TO CORRECT LOCATION
+        /*will DrawString on the form the words from the file*/
+        protected void TopLevelForm_Paint(object sender, PaintEventArgs e)
+        {
+            //text that will be displayed:
+           string toDraw = "test draw";
+           //color:
+            Brush brush = new SolidBrush(Color.Blue);
+            //size:
+            float size = 12F;
+            //location:
+            int x = 0;
+            int y = 40;
+
+           int numberOfItems = document.Texts.Count;
+
+            if(numberOfItems != 0) { 
+            TextsDocument document2 = document;
+            toDraw = document.Texts.ElementAt(0).TextToDraw;
+           }
+           
+            Graphics g = e.Graphics;
+
+            Font font = new Font("Arial", size);
+            FontFamily family = font.FontFamily;
+
+            
+            //g.DrawLine(Pens.Black, 0, y, width, y);
+            g.DrawString(toDraw, font, brush, x, y);
+
+        }
+
+
+
     }
 }

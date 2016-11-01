@@ -129,7 +129,7 @@
       <Name>Homework3ControlLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\Homework7\Homework7.csproj">
-      <Project>{C48E21F7-4384-41F2-8A36-3C3B8979FECC}</Project>
+      <Project>{c48e21f7-4384-41f2-8a36-3c3b8979fecc}</Project>
       <Name>Homework7</Name>
     </ProjectReference>
     <ProjectReference Include="..\SingleInstanceApplicationLib\SingleInstanceApplicationLib.csproj">
