@@ -75,46 +75,42 @@ namespace WindowsProgramingHomework8 {
         }
 
 
-        //THIS IS TESTING , NEEDS TO BE MOVED TO CORRECT LOCATION
         /*will DrawString on the form the words from the file*/
         private void FormMain_Paint(object sender, PaintEventArgs e)
         {
 
-            //size:
-            float size = 12F;
-            //Font:
-            var fontFamily = new FontFamily("Arial");
-            var font = new Font(fontFamily, size, FontStyle.Regular, GraphicsUnit.Pixel);
-
-            //text that will be displayed:
-            string toDraw = "test draw";
-            //color:
-            Brush brush = new SolidBrush(Color.Blue);
-           
-            //location:
-            int x = 0;
-            int y = 40;
-
+            Graphics g = e.Graphics;
             int numberOfItems = document.Texts.Count;
 
-            if (numberOfItems != 0)
+            float y = 30;
+           
+            for (int i = 0; i < numberOfItems; i++)
             {
-                TextsDocument document2 = document;
-                toDraw = document.Texts.ElementAt(0).TextToDraw;
-            }
 
-            Graphics g = e.Graphics;
+                //location:
+                float x = document.Texts.ElementAt(i).Location.X;
+                //float y = document.Texts.ElementAt(i).Location.Y + 30;
 
-        
+                //size:
+                float size = document.Texts.ElementAt(i).Font.Size;
+                //Font:
+                var font = document.Texts.ElementAt(i).Font;
 
-            //g.DrawLine(Pens.Black, 0, y, width, y);
-            g.DrawString(toDraw, font, brush, x, y);
+                //text that will be displayed:
+                string toDraw = "test draw";
+                //color:
+                Brush brush = new SolidBrush(Color.Black);
+
+              
+                toDraw = document.Texts.ElementAt(i).TextToDraw;
+                                       
+                   //NEED TO FIX: DEPENDING ON SIZE DRAW
+                g.DrawString(toDraw, font, brush, x, y);
+                y += 20;
+                
+            }//end forloop
 
         }
 
-        private void FormMain_Load(object sender, EventArgs e)
-        {
-            ///Hello
-        }
     }
 }
