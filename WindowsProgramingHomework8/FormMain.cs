@@ -80,13 +80,17 @@ namespace WindowsProgramingHomework8 {
         private void FormMain_Paint(object sender, PaintEventArgs e)
         {
 
+            //size:
+            float size = 12F;
+            //Font:
+            var fontFamily = new FontFamily("Arial");
+            var font = new Font(fontFamily, size, FontStyle.Regular, GraphicsUnit.Pixel);
 
             //text that will be displayed:
             string toDraw = "test draw";
             //color:
             Brush brush = new SolidBrush(Color.Blue);
-            //size:
-            float size = 12F;
+           
             //location:
             int x = 0;
             int y = 40;
@@ -101,9 +105,7 @@ namespace WindowsProgramingHomework8 {
 
             Graphics g = e.Graphics;
 
-            Font font = new Font("Arial", size);
-            FontFamily family = font.FontFamily;
-
+        
 
             //g.DrawLine(Pens.Black, 0, y, width, y);
             g.DrawString(toDraw, font, brush, x, y);
