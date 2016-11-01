@@ -125,6 +125,7 @@
             this.Name = "FormMain";
             this.Text = "Text Editor";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.FormMain_Paint);
+            this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.FormMain_MouseDoubleClick);
             this.mainMenuStrip.ResumeLayout(false);
             this.mainMenuStrip.PerformLayout();
             this.ResumeLayout(false);

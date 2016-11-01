@@ -74,7 +74,7 @@ namespace WindowsProgramingHomework8 {
             return false;
         }
 
-
+        
         /*will DrawString on the form the words from the file*/
         private void FormMain_Paint(object sender, PaintEventArgs e)
         {
@@ -103,14 +103,36 @@ namespace WindowsProgramingHomework8 {
 
               
                 toDraw = document.Texts.ElementAt(i).TextToDraw;
-                                       
-                   //NEED TO FIX: DEPENDING ON SIZE DRAW
+                               
+                //g.RotateTransform(30);
+
+                //NEED TO FIX: DEPENDING ON SIZE DRAW
                 g.DrawString(toDraw, font, brush, x, y);
+                                            
+
                 y += 20;
                 
             }//end forloop
 
         }
 
+        //prompt to enter a word to draw
+        private void FormMain_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            string input = Microsoft.VisualBasic.Interaction.InputBox("Enter a Word to draw",
+                        "Enter a Word to draw",
+                        "Default",
+                        0,
+                        0);
+
+            Graphics f = this.CreateGraphics();
+            f.DrawString(input, new Font("Arial", 16), new SolidBrush(Color.Black) , e.X, e.Y);
+
+            Text t = new Text(input ,new PointF(e.X , e.Y), new Font("Arial", 16) , 0);
+
+            document.Texts.Add(t);
+
+            //this.Refresh();
+        }
     }
 }

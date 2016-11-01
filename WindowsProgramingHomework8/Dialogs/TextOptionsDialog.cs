@@ -52,7 +52,7 @@ namespace WindowsProgramingHomework8.Dialogs
 
                 //Need fix
                 document.Texts.ElementAt(textsComboBox.SelectedIndex).Location = new PointF(x, y);
-
+                               
                 document.Texts.ElementAt(textsComboBox.SelectedIndex).Rotation = rot;
 
                 document.Texts.ElementAt(textsComboBox.SelectedIndex).TextToDraw = textToDrawTextBox.Text;
@@ -61,7 +61,7 @@ namespace WindowsProgramingHomework8.Dialogs
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
             }
 
 
