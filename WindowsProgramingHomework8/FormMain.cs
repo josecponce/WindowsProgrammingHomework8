@@ -81,7 +81,8 @@ namespace WindowsProgramingHomework8 {
 
             Graphics g = e.Graphics;
             int numberOfItems = document.Texts.Count;
-                                  
+
+                      
             for (int i = 0; i < numberOfItems; i++)
             {
 
@@ -106,7 +107,7 @@ namespace WindowsProgramingHomework8 {
                 //g.RotateTransform(30);
                 
                 //NEED TO FIX: DEPENDING ON SIZE DRAW
-                g.DrawString(toDraw, font, brush, x, y+(10*i));
+                g.DrawString(toDraw, font, brush, x, y);
 
                            
             }//end forloop
@@ -122,15 +123,13 @@ namespace WindowsProgramingHomework8 {
                         0,
                         0);
 
-            Graphics f = this.CreateGraphics();
-            f.DrawString(input, new Font("Arial", 16), new SolidBrush(Color.Black) , e.X, e.Y);
+            //Graphics f = this.CreateGraphics();
+            //f.DrawString(input, new Font("Arial", 16), new SolidBrush(Color.Black) , e.X, e.Y);
 
             Text t = new Text(input ,new PointF(e.X , e.Y), new Font("Arial", 16) , 0);
+            document.Texts.Add(t);       
 
-            document.Texts.Add(t);
-            
-
-            //this.Refresh();
+            this.Refresh();
         }
 
 
@@ -174,6 +173,23 @@ namespace WindowsProgramingHomework8 {
             }
            
 
+        }
+
+        private void FormMain_DragEnter(object sender, DragEventArgs e)
+        {
+            if ((e.AllowedEffect & DragDropEffects.All) != 0 && e.Data.GetDataPresent(typeof(string)))
+            {
+                e.Effect = DragDropEffects.All;
+            }
+        }
+
+        private void FormMain_DragDrop(object sender, DragEventArgs e)
+        {
+            string stringData = e.Data.GetData(typeof(string)) as string;
+            Text t = new Text(stringData, new PointF(e.X, e.Y), new Font("Arial", 16), 0);
+            document.Texts.Add(t);
+
+            this.Refresh();
         }
     }
 }
