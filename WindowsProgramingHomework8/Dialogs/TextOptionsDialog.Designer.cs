@@ -118,7 +118,6 @@
             this.fontTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.textsBindingSource, "Font", true));
             this.fontTextBox.Location = new System.Drawing.Point(91, 114);
             this.fontTextBox.Name = "fontTextBox";
-            this.fontTextBox.ReadOnly = true;
             this.fontTextBox.Size = new System.Drawing.Size(129, 22);
             this.fontTextBox.TabIndex = 2;
             // 
