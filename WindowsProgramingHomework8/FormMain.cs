@@ -1,5 +1,5 @@
 ﻿using Homework3ControlLib;
-using Homework7;
+using Homework7.Dialogs;
 using Microsoft.Practices.Unity;
 using SingleInstanceApplicationLib;
 using System;
@@ -18,6 +18,8 @@ namespace WindowsProgramingHomework8
 {
     public partial class FormMain : TopLevelForm<TextsDocument>
     {
+
+        private AboutDialog aboutDialog;
 
         public override ToolStripMenuItem WindowsMenu =>
             windowsToolStripMenuItem;
@@ -149,6 +151,7 @@ namespace WindowsProgramingHomework8
 
 
         int StringindexToMove = -1;
+
         //on key down move the string, get all rectanges from strings and see if the click is inside any of them
         private void FormMain_MouseDown(object sender, MouseEventArgs e)
         {
@@ -207,12 +210,6 @@ namespace WindowsProgramingHomework8
             document.Texts.Add(t);
 
             this.Refresh();
-        }
-
-        //When a text object is right-clicked, open the options dialog modelessly
-        private void FormMain_MouseClick(object sender, MouseEventArgs e)
-        {
-
         }
     }
 }
