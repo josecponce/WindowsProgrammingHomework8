@@ -208,5 +208,11 @@ namespace WindowsProgramingHomework8
 
             this.Refresh();
         }
+
+        //When a text object is right-clicked, open the options dialog modelessly
+        private void FormMain_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }
     }
 }
