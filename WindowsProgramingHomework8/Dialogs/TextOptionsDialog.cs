@@ -22,8 +22,11 @@ namespace WindowsProgramingHomework8.Dialogs
 
             this.textsDocumentBindingSource.DataSource = document;
             int pos = BindingManager.Position;
-            WindowsProgramingHomework8.Entities.Text txt = this.textsComboBox.Items[BindingManager.Position] as WindowsProgramingHomework8.Entities.Text;
-            fontSize = txt.Font.Size;
+            if (pos != -1)
+            {
+             WindowsProgramingHomework8.Entities.Text txt = this.textsComboBox.Items[BindingManager.Position] as WindowsProgramingHomework8.Entities.Text;
+             fontSize = txt.Font.Size;
+            }
             RefreshItems();
         }
 

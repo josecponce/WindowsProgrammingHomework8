@@ -75,41 +75,46 @@ namespace WindowsProgramingHomework8 {
         }
 
         
-        /*will DrawString on the form the words from the file*/
-        private void FormMain_Paint(object sender, PaintEventArgs e)
+      
+
+ private void FormMain_Paint(object sender, PaintEventArgs e)
         {
 
             Graphics g = e.Graphics;
             int numberOfItems = document.Texts.Count;
 
-                      
+                
             for (int i = 0; i < numberOfItems; i++)
             {
-
                 //location:
                 float x = document.Texts.ElementAt(i).Location.X;
-                float y = document.Texts.ElementAt(i).Location.Y;
+                float y = document.Texts.ElementAt(i).Location.Y + 30;
                 
-
                 //size:
                 float size = document.Texts.ElementAt(i).Font.Size;
+
                 //Font:
                 var font = document.Texts.ElementAt(i).Font;
 
                 //text that will be displayed:
                 string toDraw = "test draw";
-                //color:
-                Brush brush = new SolidBrush(Color.Black);
-                
-              
                 toDraw = document.Texts.ElementAt(i).TextToDraw;
 
-                //g.RotateTransform(30);
-                
-                //NEED TO FIX: DEPENDING ON SIZE DRAW
-                g.DrawString(toDraw, font, brush, x, y);
+                //color:
+                Brush brush = new SolidBrush(Color.Black);              
+              
+                float rotation = (float)document.Texts.ElementAt(i).Rotation;
 
-                           
+                SizeF textSize = g.MeasureString(document.Texts.ElementAt(i).TextToDraw, font);
+
+                //move rotation point to center of image
+                g.TranslateTransform(textSize.Width / 2 + x, textSize.Height / 2 + y);
+                //rotate
+                g.RotateTransform(rotation);
+                //move image back
+                g.DrawString(toDraw, font, brush, -(textSize.Width / 2), -(textSize.Height / 2));
+                g.ResetTransform();
+
             }//end forloop
 
         }
