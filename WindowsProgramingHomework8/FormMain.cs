@@ -211,55 +211,5 @@ namespace WindowsProgramingHomework8
 
             this.Refresh();
         }
-
-        private void oathToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (var dialog = new OathDialog())
-            {
-                dialog.StartPosition = FormStartPosition.Manual;
-                dialog.Location = new Point(this.Location.X + this.Width,
-                    this.Location.Y);
-                dialog.ShowDialog();
-            }
-
-        }
-
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (aboutDialog != null)
-            {
-                return;
-            }
-            aboutDialog = new AboutDialog();
-            aboutDialog.StartPosition = FormStartPosition.Manual;
-            aboutDialog.Location = new Point(this.Location.X,
-                this.Location.Y + this.Height);
-            aboutDialog.FormClosed += AboutDialog_FormClosed;
-            aboutDialog.Show();
-
-        }
-        private void AboutDialog_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            aboutDialog = null;
-        }
-
-        private void newTextToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string input = Microsoft.VisualBasic.Interaction.InputBox("Enter a Word to draw",
-            "Enter a Word to draw",
-            "Default",
-            500,
-           500);
-
-            //Graphics f = this.CreateGraphics();
-            //f.DrawString(input, new Font("Arial", 16), new SolidBrush(Color.Black) , e.X, e.Y);
-
-            Text t = new Text(input, new PointF(20, 20), new Font("Arial", 16), 0);
-            document.Texts.Add(t);
-
-            this.Refresh();
-
-
-        }
     }
 }
