@@ -86,21 +86,60 @@ namespace WindowsProgramingHomework8
             return false;
         }
 
-
-
-
         private void FormMain_Paint(object sender, PaintEventArgs e)
         {
 
             Graphics g = e.Graphics;
             int numberOfItems = document.Texts.Count;
 
+            bool isFromDoc = true;
+            float x = 0;
+            float y = 2;
+            PointF def = new PointF(0,0);
+            float lineCount = 0;
+
+            foreach (var item in document.Texts)
+            {
+                if (item.Location != def)
+                {
+                    isFromDoc = false;
+                    break;
+                }
+            }
+            
 
             for (int i = 0; i < numberOfItems; i++)
             {
                 //location:
-                float x = document.Texts.ElementAt(i).Location.X;
-                float y = document.Texts.ElementAt(i).Location.Y + 30;
+                if (isFromDoc)
+                {
+                    if (i != 0)
+                    {
+                        var fontType = document.Texts.ElementAt(i - 1).Font;
+                        SizeF wordSize = g.MeasureString(document.Texts.ElementAt(i - 1).TextToDraw, fontType);
+                        SizeF currentWordSize = g.MeasureString(document.Texts.ElementAt(i - 1).TextToDraw, fontType);
+
+
+                        x = x + wordSize.Width + 1;
+                        y = lineCount;
+
+                        if ((x + currentWordSize.Width + 2) > this.ClientSize.Width)
+                        {
+                            lineCount = lineCount + wordSize.Height + 1;
+                            x = 0;
+                            y = lineCount;
+                        }
+                    }
+
+                    document.Texts.ElementAt(i).Location = new PointF(x,y);
+
+                }
+                else
+                {
+                    
+                    x = document.Texts.ElementAt(i).Location.X;
+                    y = document.Texts.ElementAt(i).Location.Y + 30;
+                }
 
                 //size:
                 float size = document.Texts.ElementAt(i).Font.Size;
@@ -116,7 +155,6 @@ namespace WindowsProgramingHomework8
                 Brush brush = new SolidBrush(Color.Black);
 
                 float rotation = (float)document.Texts.ElementAt(i).Rotation;
-
                 SizeF textSize = g.MeasureString(document.Texts.ElementAt(i).TextToDraw, font);
 
                 //move rotation point to center of image

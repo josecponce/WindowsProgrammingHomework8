@@ -78,7 +78,7 @@ namespace WindowsProgramingHomework8.FileSearch {
         private void FindFiles(DirectoryInfo dir) {
             lock (syncObj) { }//this will pause the execution 
             
-            //cancelToken.ThrowIfCancellationRequested();
+            cancelToken.ThrowIfCancellationRequested();
 
             try {
                 DirectoryInfo[] children = getDirectories(dir);
