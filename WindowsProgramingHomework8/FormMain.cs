@@ -242,5 +242,24 @@ namespace WindowsProgramingHomework8
         {
             aboutDialog = null;
         }
+
+        private void newTextToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string input = Microsoft.VisualBasic.Interaction.InputBox("Enter a Word to draw",
+            "Enter a Word to draw",
+            "Default",
+            500,
+           500);
+
+            //Graphics f = this.CreateGraphics();
+            //f.DrawString(input, new Font("Arial", 16), new SolidBrush(Color.Black) , e.X, e.Y);
+
+            Text t = new Text(input, new PointF(20, 20), new Font("Arial", 16), 0);
+            document.Texts.Add(t);
+
+            this.Refresh();
+
+
+        }
     }
 }
