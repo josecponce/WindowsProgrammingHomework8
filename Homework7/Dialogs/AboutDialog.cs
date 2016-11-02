@@ -30,13 +30,11 @@ namespace Homework7.Dialogs
             return label;
         }
 
-        private const string Description = "This application draws shapes instead of \r\n" +
-                                        "using shape controls. It uses pens and brushes \r\n " +
-                                        "to draw and fill the shapes. It uses data binding \r\n" +
-                                        "to exchange data between the main form and the shape \r\n" +
-                                        "dialog. It uses a separate class for a document that \r\n " +
-                                        "contains a list of shape ojects and a separate class \r\n" +
-                                        "for the shape information.";
+        private const string Description = "This application draws texts instead of \r\n" +
+                                        "using text box controls. It uses a thread to find \r\n " +
+                                        "text elements in the file system. It uses data binding \r\n" +
+                                        "to exchange data between the main form and the text \r\n" +
+                                        "options dialog.";
 
         private void AboutDialog_Paint(object sender, PaintEventArgs e)
         {

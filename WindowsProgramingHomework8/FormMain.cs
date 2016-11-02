@@ -1,5 +1,5 @@
 ﻿using Homework3ControlLib;
-using Homework7;
+using Homework7.Dialogs;
 using Microsoft.Practices.Unity;
 using SingleInstanceApplicationLib;
 using System;
@@ -16,6 +16,8 @@ using WindowsProgramingHomework8.Entities;
 
 namespace WindowsProgramingHomework8 {
     public partial class FormMain : TopLevelForm<TextsDocument> {
+
+        private AboutDialog aboutDialog;
 
         public override ToolStripMenuItem WindowsMenu =>
             windowsToolStripMenuItem;
@@ -139,6 +141,7 @@ namespace WindowsProgramingHomework8 {
 
 
         int StringindexToMove = -1;
+
         //on key down move the string, get all rectanges from strings and see if the click is inside any of them
         private void FormMain_MouseDown(object sender, MouseEventArgs e)
         {
@@ -195,6 +198,37 @@ namespace WindowsProgramingHomework8 {
             document.Texts.Add(t);
            
             this.Refresh();
+        }
+
+        private void oathToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new OathDialog())
+            {
+                dialog.StartPosition = FormStartPosition.Manual;
+                dialog.Location = new Point(this.Location.X + this.Width,
+                    this.Location.Y);
+                dialog.ShowDialog();
+            }
+
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (aboutDialog != null)
+            {
+                return;
+            }
+            aboutDialog = new AboutDialog();
+            aboutDialog.StartPosition = FormStartPosition.Manual;
+            aboutDialog.Location = new Point(this.Location.X,
+                this.Location.Y + this.Height);
+            aboutDialog.FormClosed += AboutDialog_FormClosed;
+            aboutDialog.Show();
+
+        }
+        private void AboutDialog_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            aboutDialog = null;
         }
     }
 }
