@@ -81,15 +81,13 @@ namespace WindowsProgramingHomework8 {
 
             Graphics g = e.Graphics;
             int numberOfItems = document.Texts.Count;
-
-            //float y = 30;
-           
+                                  
             for (int i = 0; i < numberOfItems; i++)
             {
 
                 //location:
                 float x = document.Texts.ElementAt(i).Location.X;
-                float y = document.Texts.ElementAt(i).Location.Y + 30;
+                float y = document.Texts.ElementAt(i).Location.Y;
                 
 
                 //size:
@@ -101,18 +99,16 @@ namespace WindowsProgramingHomework8 {
                 string toDraw = "test draw";
                 //color:
                 Brush brush = new SolidBrush(Color.Black);
-
+                
               
                 toDraw = document.Texts.ElementAt(i).TextToDraw;
-                               
+
                 //g.RotateTransform(30);
-
-                //NEED TO FIX: DEPENDING ON SIZE DRAW
-                g.DrawString(toDraw, font, brush, x, y);
-                                            
-
-                //y += 20;
                 
+                //NEED TO FIX: DEPENDING ON SIZE DRAW
+                g.DrawString(toDraw, font, brush, x, y+(10*i));
+
+                           
             }//end forloop
 
         }
@@ -135,6 +131,49 @@ namespace WindowsProgramingHomework8 {
             
 
             //this.Refresh();
+        }
+
+
+        int StringindexToMove = -1;
+        //on key down move the string, get all rectanges from strings and see if the click is inside any of them
+        private void FormMain_MouseDown(object sender, MouseEventArgs e)
+        {
+
+            Graphics f = this.CreateGraphics();
+
+            //calcualtes a rectable hitbox with the length of string , cooridnates and font type
+            for (int i = 0; i < document.Texts.Count; i++)
+            {
+                //get string  
+                String toDraw = document.Texts.ElementAt(i).TextToDraw;
+                //get Font:
+                var font = document.Texts.ElementAt(i).Font;
+
+                // Measure string.
+                SizeF stringSize = new SizeF();
+                stringSize = f.MeasureString(toDraw, font);
+                //rectangle dimensions:
+                Rectangle rec = new Rectangle((int)document.Texts.ElementAt(i).Location.X, (int)document.Texts.ElementAt(i).Location.Y, (int)stringSize.Width, (int)stringSize.Height);
+                
+                if (rec.Contains(e.X , e.Y)) {
+                    //MessageBox.Show("clciked inside: "+ i);
+                    StringindexToMove = i;
+                }
+
+            }
+
+        }//end mouseDown
+
+        private void FormMain_MouseUp(object sender, MouseEventArgs e)
+        {
+           if(StringindexToMove != -1) { 
+                document.Texts.ElementAt(StringindexToMove).Location = new PointF(e.X, e.Y);
+                //MessageBox.Show(e.X +" y:" + e.Y);
+                this.Refresh();
+                StringindexToMove = -1;
+            }
+           
+
         }
     }
 }
