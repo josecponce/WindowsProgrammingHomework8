@@ -120,8 +120,8 @@ namespace WindowsProgramingHomework8 {
             string input = Microsoft.VisualBasic.Interaction.InputBox("Enter a Word to draw",
                         "Enter a Word to draw",
                         "Default",
-                        0,
-                        0);
+                        e.X+20,
+                        e.Y+20);
 
             //Graphics f = this.CreateGraphics();
             //f.DrawString(input, new Font("Arial", 16), new SolidBrush(Color.Black) , e.X, e.Y);
@@ -186,9 +186,9 @@ namespace WindowsProgramingHomework8 {
         private void FormMain_DragDrop(object sender, DragEventArgs e)
         {
             string stringData = e.Data.GetData(typeof(string)) as string;
-            Text t = new Text(stringData, new PointF(e.X, e.Y), new Font("Arial", 16), 0);
+            Text t = new Text(stringData, this.PointToClient(new Point(e.X, e.Y)), new Font("Arial", 16), 0);
             document.Texts.Add(t);
-
+           
             this.Refresh();
         }
     }
