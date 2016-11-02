@@ -75,44 +75,46 @@ namespace WindowsProgramingHomework8 {
         }
 
         
-        /*will DrawString on the form the words from the file*/
-        private void FormMain_Paint(object sender, PaintEventArgs e)
+      
+
+ private void FormMain_Paint(object sender, PaintEventArgs e)
         {
 
             Graphics g = e.Graphics;
             int numberOfItems = document.Texts.Count;
 
-            //float y = 30;
-           
+                
             for (int i = 0; i < numberOfItems; i++)
             {
-
                 //location:
                 float x = document.Texts.ElementAt(i).Location.X;
                 float y = document.Texts.ElementAt(i).Location.Y + 30;
                 
-
                 //size:
                 float size = document.Texts.ElementAt(i).Font.Size;
+
                 //Font:
                 var font = document.Texts.ElementAt(i).Font;
 
                 //text that will be displayed:
                 string toDraw = "test draw";
-                //color:
-                Brush brush = new SolidBrush(Color.Black);
-
-              
                 toDraw = document.Texts.ElementAt(i).TextToDraw;
-                               
-                //g.RotateTransform(30);
 
-                //NEED TO FIX: DEPENDING ON SIZE DRAW
-                g.DrawString(toDraw, font, brush, x, y);
-                                            
+                //color:
+                Brush brush = new SolidBrush(Color.Black);              
+              
+                float rotation = (float)document.Texts.ElementAt(i).Rotation;
 
-                //y += 20;
-                
+                SizeF textSize = g.MeasureString(document.Texts.ElementAt(i).TextToDraw, font);
+
+                //move rotation point to center of image
+                g.TranslateTransform(textSize.Width / 2 + x, textSize.Height / 2 + y);
+                //rotate
+                g.RotateTransform(rotation);
+                //move image back
+                g.DrawString(toDraw, font, brush, -(textSize.Width / 2), -(textSize.Height / 2));
+                g.ResetTransform();
+
             }//end forloop
 
         }
@@ -123,18 +125,76 @@ namespace WindowsProgramingHomework8 {
             string input = Microsoft.VisualBasic.Interaction.InputBox("Enter a Word to draw",
                         "Enter a Word to draw",
                         "Default",
-                        0,
-                        0);
+                        e.X+20,
+                        e.Y+20);
 
-            Graphics f = this.CreateGraphics();
-            f.DrawString(input, new Font("Arial", 16), new SolidBrush(Color.Black) , e.X, e.Y);
+            //Graphics f = this.CreateGraphics();
+            //f.DrawString(input, new Font("Arial", 16), new SolidBrush(Color.Black) , e.X, e.Y);
 
             Text t = new Text(input ,new PointF(e.X , e.Y), new Font("Arial", 16) , 0);
+            document.Texts.Add(t);       
 
+            this.Refresh();
+        }
+
+
+        int StringindexToMove = -1;
+        //on key down move the string, get all rectanges from strings and see if the click is inside any of them
+        private void FormMain_MouseDown(object sender, MouseEventArgs e)
+        {
+
+            Graphics f = this.CreateGraphics();
+
+            //calcualtes a rectable hitbox with the length of string , cooridnates and font type
+            for (int i = 0; i < document.Texts.Count; i++)
+            {
+                //get string  
+                String toDraw = document.Texts.ElementAt(i).TextToDraw;
+                //get Font:
+                var font = document.Texts.ElementAt(i).Font;
+
+                // Measure string.
+                SizeF stringSize = new SizeF();
+                stringSize = f.MeasureString(toDraw, font);
+                //rectangle dimensions:
+                Rectangle rec = new Rectangle((int)document.Texts.ElementAt(i).Location.X, (int)document.Texts.ElementAt(i).Location.Y, (int)stringSize.Width, (int)stringSize.Height);
+                
+                if (rec.Contains(e.X , e.Y)) {
+                    //MessageBox.Show("clciked inside: "+ i);
+                    StringindexToMove = i;
+                }
+
+            }
+
+        }//end mouseDown
+
+        private void FormMain_MouseUp(object sender, MouseEventArgs e)
+        {
+           if(StringindexToMove != -1) { 
+                document.Texts.ElementAt(StringindexToMove).Location = new PointF(e.X, e.Y);
+                //MessageBox.Show(e.X +" y:" + e.Y);
+                this.Refresh();
+                StringindexToMove = -1;
+            }
+           
+
+        }
+
+        private void FormMain_DragEnter(object sender, DragEventArgs e)
+        {
+            if ((e.AllowedEffect & DragDropEffects.All) != 0 && e.Data.GetDataPresent(typeof(string)))
+            {
+                e.Effect = DragDropEffects.All;
+            }
+        }
+
+        private void FormMain_DragDrop(object sender, DragEventArgs e)
+        {
+            string stringData = e.Data.GetData(typeof(string)) as string;
+            Text t = new Text(stringData, this.PointToClient(new Point(e.X, e.Y)), new Font("Arial", 16), 0);
             document.Texts.Add(t);
-            
-
-            //this.Refresh();
+           
+            this.Refresh();
         }
     }
 }
