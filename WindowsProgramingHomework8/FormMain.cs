@@ -14,20 +14,24 @@ using System.Windows.Forms;
 using WindowsProgramingHomework8.Dialogs;
 using WindowsProgramingHomework8.Entities;
 
-namespace WindowsProgramingHomework8 {
-    public partial class FormMain : TopLevelForm<TextsDocument> {
+namespace WindowsProgramingHomework8
+{
+    public partial class FormMain : TopLevelForm<TextsDocument>
+    {
 
         public override ToolStripMenuItem WindowsMenu =>
             windowsToolStripMenuItem;
         protected override bool unsavedChanges => document.Dirty;
 
-        public FormMain(IUnityContainer container, IDocumentRepository<TextsDocument> repository) 
-            : base(container, repository) {
+        public FormMain(IUnityContainer container, IDocumentRepository<TextsDocument> repository)
+            : base(container, repository)
+        {
             InitializeComponent();
         }
-        protected override void Initialize(string fileName) {
+        protected override void Initialize(string fileName)
+        {
             base.Initialize(fileName);
-            
+
             //setting handlers from parent class because designer won't do it for some unamusing reason
             newToolStripMenuItem.Click += newToolStripMenuItem_Click;
             openToolStripMenuItem.Click += openToolStripMenuItem_Click;
@@ -36,14 +40,16 @@ namespace WindowsProgramingHomework8 {
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
         }
 
-        protected override void saveFile(bool promptUser) {
+        protected override void saveFile(bool promptUser)
+        {
             base.saveFile(promptUser);
-            document.Dirty = false;        
+            document.Dirty = false;
         }
 
         private void textOptionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (bringToFrontIfExists<TextOptionsDialog>()) {
+            if (bringToFrontIfExists<TextOptionsDialog>())
+            {
                 return;
             }
             TextOptionsDialog pForm = new TextOptionsDialog(this.document);
@@ -53,16 +59,20 @@ namespace WindowsProgramingHomework8 {
 
         private void searchToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (bringToFrontIfExists<SearchDialog>()) {
+            if (bringToFrontIfExists<SearchDialog>())
+            {
                 return;
             }
             SearchDialog searchDialog = new SearchDialog();
             searchDialog.Show(this);
         }
 
-        private bool bringToFrontIfExists<Q>() where Q : Form{
-            foreach (Form f in Application.OpenForms) {
-                if (f is Q) {
+        private bool bringToFrontIfExists<Q>() where Q : Form
+        {
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f is Q)
+                {
                     if (f.WindowState == FormWindowState.Minimized)
                         f.WindowState = FormWindowState.Normal;
                     f.Focus();
@@ -74,22 +84,22 @@ namespace WindowsProgramingHomework8 {
             return false;
         }
 
-        
-      
 
- private void FormMain_Paint(object sender, PaintEventArgs e)
+
+
+        private void FormMain_Paint(object sender, PaintEventArgs e)
         {
 
             Graphics g = e.Graphics;
             int numberOfItems = document.Texts.Count;
 
-                
+
             for (int i = 0; i < numberOfItems; i++)
             {
                 //location:
                 float x = document.Texts.ElementAt(i).Location.X;
                 float y = document.Texts.ElementAt(i).Location.Y + 30;
-                
+
                 //size:
                 float size = document.Texts.ElementAt(i).Font.Size;
 
@@ -101,8 +111,8 @@ namespace WindowsProgramingHomework8 {
                 toDraw = document.Texts.ElementAt(i).TextToDraw;
 
                 //color:
-                Brush brush = new SolidBrush(Color.Black);              
-              
+                Brush brush = new SolidBrush(Color.Black);
+
                 float rotation = (float)document.Texts.ElementAt(i).Rotation;
 
                 SizeF textSize = g.MeasureString(document.Texts.ElementAt(i).TextToDraw, font);
@@ -125,14 +135,14 @@ namespace WindowsProgramingHomework8 {
             string input = Microsoft.VisualBasic.Interaction.InputBox("Enter a Word to draw",
                         "Enter a Word to draw",
                         "Default",
-                        e.X+20,
-                        e.Y+20);
+                        e.X + 20,
+                        e.Y + 20);
 
             //Graphics f = this.CreateGraphics();
             //f.DrawString(input, new Font("Arial", 16), new SolidBrush(Color.Black) , e.X, e.Y);
 
-            Text t = new Text(input ,new PointF(e.X , e.Y), new Font("Arial", 16) , 0);
-            document.Texts.Add(t);       
+            Text t = new Text(input, new PointF(e.X, e.Y), new Font("Arial", 16), 0);
+            document.Texts.Add(t);
 
             this.Refresh();
         }
@@ -158,9 +168,10 @@ namespace WindowsProgramingHomework8 {
                 stringSize = f.MeasureString(toDraw, font);
                 //rectangle dimensions:
                 Rectangle rec = new Rectangle((int)document.Texts.ElementAt(i).Location.X, (int)document.Texts.ElementAt(i).Location.Y, (int)stringSize.Width, (int)stringSize.Height);
-                
-                if (rec.Contains(e.X , e.Y)) {
-                    //MessageBox.Show("clciked inside: "+ i);
+
+                if (rec.Contains(e.X, e.Y))
+                {
+                    //MessageBox.Show("clicked inside: "+ i);
                     StringindexToMove = i;
                 }
 
@@ -170,13 +181,14 @@ namespace WindowsProgramingHomework8 {
 
         private void FormMain_MouseUp(object sender, MouseEventArgs e)
         {
-           if(StringindexToMove != -1) { 
+            if (StringindexToMove != -1)
+            {
                 document.Texts.ElementAt(StringindexToMove).Location = new PointF(e.X, e.Y);
                 //MessageBox.Show(e.X +" y:" + e.Y);
                 this.Refresh();
                 StringindexToMove = -1;
             }
-           
+
 
         }
 
@@ -193,7 +205,7 @@ namespace WindowsProgramingHomework8 {
             string stringData = e.Data.GetData(typeof(string)) as string;
             Text t = new Text(stringData, this.PointToClient(new Point(e.X, e.Y)), new Font("Arial", 16), 0);
             document.Texts.Add(t);
-           
+
             this.Refresh();
         }
     }

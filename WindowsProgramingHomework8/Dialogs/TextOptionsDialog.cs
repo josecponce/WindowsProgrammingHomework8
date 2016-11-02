@@ -11,7 +11,7 @@ using WindowsProgramingHomework8.Entities;
 
 namespace WindowsProgramingHomework8.Dialogs
 {
-      public partial class TextOptionsDialog : Form
+    public partial class TextOptionsDialog : Form
     {
         TextsDocument document;
         private double fontSize;
@@ -24,8 +24,8 @@ namespace WindowsProgramingHomework8.Dialogs
             int pos = BindingManager.Position;
             if (pos != -1)
             {
-             WindowsProgramingHomework8.Entities.Text txt = this.textsComboBox.Items[BindingManager.Position] as WindowsProgramingHomework8.Entities.Text;
-             fontSize = txt.Font.Size;
+                WindowsProgramingHomework8.Entities.Text txt = this.textsComboBox.Items[BindingManager.Position] as WindowsProgramingHomework8.Entities.Text;
+                fontSize = txt.Font.Size;
             }
             RefreshItems();
         }
@@ -50,7 +50,7 @@ namespace WindowsProgramingHomework8.Dialogs
             {
                 //Alex:
                 onClickEqualOKorApply();
-                
+
             }
             catch (Exception ex)
             {
@@ -101,13 +101,13 @@ namespace WindowsProgramingHomework8.Dialogs
         {
 
             try
-            {                
+            {
                 onClickEqualOKorApply();
 
             }
             catch (Exception ex)
             {
-                
+
             }
 
             this.Owner.Refresh();
@@ -115,7 +115,8 @@ namespace WindowsProgramingHomework8.Dialogs
         }
 
         //apply and OK buttons have this code the same:
-        public void onClickEqualOKorApply() {
+        public void onClickEqualOKorApply()
+        {
             float x = 0;
             //could had done 2 boxes with just integers:
             string input = new String(locationTextBox.Text.Split(',')[0].Where(Char.IsDigit).ToArray());
