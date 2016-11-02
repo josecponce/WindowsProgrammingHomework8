@@ -41,23 +41,9 @@ namespace WindowsProgramingHomework8.Dialogs
         {
             try
             {
-                float x = 0;
-                float.TryParse(locationTextBox.Text.Split(',')[0], out x);
-                float y = 0;
-                float.TryParse(locationTextBox.Text.Split(',')[1], out y);
-                double rot;
-                double.TryParse(rotationTextBox.Text, out rot);
-
-                document.Texts.ElementAt(textsComboBox.SelectedIndex).Font = new Font(fontTextBox.Font.Name, (float)fontSize, fontTextBox.Font.Style);
-
-                //Need fix
-                document.Texts.ElementAt(textsComboBox.SelectedIndex).Location = new PointF(x, y);
-                               
-                document.Texts.ElementAt(textsComboBox.SelectedIndex).Rotation = rot;
-
-                document.Texts.ElementAt(textsComboBox.SelectedIndex).TextToDraw = textToDrawTextBox.Text;
-
-
+                //Alex:
+                onClickEqualOKorApply();
+                
             }
             catch (Exception ex)
             {
@@ -108,24 +94,8 @@ namespace WindowsProgramingHomework8.Dialogs
         {
 
             try
-            {
-                float x = 0;
-                float.TryParse(locationTextBox.Text.Split(',')[0], out x);
-                float y = 0;
-                float.TryParse(locationTextBox.Text.Split(',')[1], out y);
-                double rot;
-                double.TryParse(rotationTextBox.Text,out rot);
-
-
-                document.Texts.ElementAt(textsComboBox.SelectedIndex).Font = new Font(fontTextBox.Font.Name, (float)fontSize, fontTextBox.Font.Style);
-
-                //Need fix
-                document.Texts.ElementAt(textsComboBox.SelectedIndex).Location = new PointF(x,y);
-
-                document.Texts.ElementAt(textsComboBox.SelectedIndex).Rotation = rot;
-
-                document.Texts.ElementAt(textsComboBox.SelectedIndex).TextToDraw = textToDrawTextBox.Text;
-
+            {                
+                onClickEqualOKorApply();
 
             }
             catch (Exception ex)
@@ -136,5 +106,33 @@ namespace WindowsProgramingHomework8.Dialogs
             this.Owner.Refresh();
 
         }
+
+        //apply and OK buttons have this code the same:
+        public void onClickEqualOKorApply() {
+            float x = 0;
+            //could had done 2 boxes with just integers:
+            string input = new String(locationTextBox.Text.Split(',')[0].Where(Char.IsDigit).ToArray());
+            float.TryParse(input, out x);
+
+            float y = 0;
+            //float.TryParse(locationTextBox.Text.Split(',')[1], out y);
+            input = new String(locationTextBox.Text.Split(',')[1].Where(Char.IsDigit).ToArray());
+            float.TryParse(input, out y);
+
+
+            double rot;
+            double.TryParse(rotationTextBox.Text, out rot);
+
+
+            document.Texts.ElementAt(textsComboBox.SelectedIndex).Font = new Font(fontTextBox.Font.Name, (float)fontSize, fontTextBox.Font.Style);
+
+            document.Texts.ElementAt(textsComboBox.SelectedIndex).Location = new PointF(x, y);
+
+            document.Texts.ElementAt(textsComboBox.SelectedIndex).Rotation = rot;
+
+            document.Texts.ElementAt(textsComboBox.SelectedIndex).TextToDraw = textToDrawTextBox.Text;
+
+        }
+
     }
 }

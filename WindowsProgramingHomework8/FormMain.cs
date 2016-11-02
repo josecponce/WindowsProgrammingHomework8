@@ -82,14 +82,15 @@ namespace WindowsProgramingHomework8 {
             Graphics g = e.Graphics;
             int numberOfItems = document.Texts.Count;
 
-            float y = 30;
+            //float y = 30;
            
             for (int i = 0; i < numberOfItems; i++)
             {
 
                 //location:
                 float x = document.Texts.ElementAt(i).Location.X;
-                //float y = document.Texts.ElementAt(i).Location.Y + 30;
+                float y = document.Texts.ElementAt(i).Location.Y + 30;
+                
 
                 //size:
                 float size = document.Texts.ElementAt(i).Font.Size;
@@ -110,7 +111,7 @@ namespace WindowsProgramingHomework8 {
                 g.DrawString(toDraw, font, brush, x, y);
                                             
 
-                y += 20;
+                //y += 20;
                 
             }//end forloop
 
@@ -131,6 +132,7 @@ namespace WindowsProgramingHomework8 {
             Text t = new Text(input ,new PointF(e.X , e.Y), new Font("Arial", 16) , 0);
 
             document.Texts.Add(t);
+            
 
             //this.Refresh();
         }
