@@ -37,6 +37,7 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textPanel = new System.Windows.Forms.Panel();
             this.mainMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -138,16 +139,30 @@
             // oathToolStripMenuItem
             // 
             this.oathToolStripMenuItem.Name = "oathToolStripMenuItem";
-            this.oathToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.oathToolStripMenuItem.Size = new System.Drawing.Size(125, 26);
             this.oathToolStripMenuItem.Text = "Oath";
             this.oathToolStripMenuItem.Click += new System.EventHandler(this.oathToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(125, 26);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // textPanel
+            // 
+            this.textPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textPanel.Location = new System.Drawing.Point(0, 28);
+            this.textPanel.Name = "textPanel";
+            this.textPanel.Size = new System.Drawing.Size(745, 398);
+            this.textPanel.TabIndex = 2;
+            this.textPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.TextPanel_DragDrop);
+            this.textPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.TextPanel_DragEnter);
+            this.textPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.TextPanel_Paint);
+            this.textPanel.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TextPanel_MouseDoubleClick);
+            this.textPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TextPanel_MouseDown);
+            this.textPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TextPanel_MouseUp);
             // 
             // FormMain
             // 
@@ -155,17 +170,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(745, 426);
+            this.Controls.Add(this.textPanel);
             this.Controls.Add(this.mainMenuStrip);
             this.MainMenuStrip = this.mainMenuStrip;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormMain";
             this.Text = "Text Editor";
-            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.FormMain_DragDrop);
-            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.FormMain_DragEnter);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.FormMain_Paint);
-            this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.FormMain_MouseDoubleClick);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FormMain_MouseDown);
-            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.FormMain_MouseUp);
             this.mainMenuStrip.ResumeLayout(false);
             this.mainMenuStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -189,6 +199,7 @@
         private System.Windows.Forms.ToolStripMenuItem oathToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newTextToolStripMenuItem;
+        private System.Windows.Forms.Panel textPanel;
     }
 }
 

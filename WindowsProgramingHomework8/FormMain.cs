@@ -86,9 +86,8 @@ namespace WindowsProgramingHomework8
             return false;
         }
 
-        private void FormMain_Paint(object sender, PaintEventArgs e)
+        private void TextPanel_Paint(object sender, PaintEventArgs e)
         {
-
             Graphics g = e.Graphics;
             int numberOfItems = document.Texts.Count;
 
@@ -105,8 +104,7 @@ namespace WindowsProgramingHomework8
                     isFromDoc = false;
                     break;
                 }
-            }
-            
+            }            
 
             for (int i = 0; i < numberOfItems; i++)
             {
@@ -119,7 +117,6 @@ namespace WindowsProgramingHomework8
                         SizeF wordSize = g.MeasureString(document.Texts.ElementAt(i - 1).TextToDraw, fontType);
                         SizeF currentWordSize = g.MeasureString(document.Texts.ElementAt(i - 1).TextToDraw, fontType);
 
-
                         x = x + wordSize.Width + 1;
                         y = lineCount;
 
@@ -130,9 +127,7 @@ namespace WindowsProgramingHomework8
                             y = lineCount;
                         }
                     }
-
                     document.Texts.ElementAt(i).Location = new PointF(x,y);
-
                 }
                 else
                 {
@@ -164,13 +159,11 @@ namespace WindowsProgramingHomework8
                 //move image back
                 g.DrawString(toDraw, font, brush, -(textSize.Width / 2), -(textSize.Height / 2));
                 g.ResetTransform();
-
             }//end forloop
-
         }
 
         //prompt to enter a word to draw
-        private void FormMain_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void TextPanel_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             string input = Microsoft.VisualBasic.Interaction.InputBox("Enter a Word to draw",
                         "Enter a Word to draw",
@@ -191,7 +184,7 @@ namespace WindowsProgramingHomework8
         int StringindexToMove = -1;
 
         //on key down move the string, get all rectanges from strings and see if the click is inside any of them
-        private void FormMain_MouseDown(object sender, MouseEventArgs e)
+        private void TextPanel_MouseDown(object sender, MouseEventArgs e)
         {
 
             Graphics f = this.CreateGraphics();
@@ -220,7 +213,7 @@ namespace WindowsProgramingHomework8
 
         }//end mouseDown
 
-        private void FormMain_MouseUp(object sender, MouseEventArgs e)
+        private void TextPanel_MouseUp(object sender, MouseEventArgs e)
         {
             if (StringindexToMove != -1)
             {
@@ -233,7 +226,7 @@ namespace WindowsProgramingHomework8
 
         }
 
-        private void FormMain_DragEnter(object sender, DragEventArgs e)
+        private void TextPanel_DragEnter(object sender, DragEventArgs e)
         {
             if ((e.AllowedEffect & DragDropEffects.All) != 0 && e.Data.GetDataPresent(typeof(string)))
             {
@@ -241,7 +234,7 @@ namespace WindowsProgramingHomework8
             }
         }
 
-        private void FormMain_DragDrop(object sender, DragEventArgs e)
+        private void TextPanel_DragDrop(object sender, DragEventArgs e)
         {
             string stringData = e.Data.GetData(typeof(string)) as string;
             Text t = new Text(stringData, this.PointToClient(new Point(e.X, e.Y)), new Font("Arial", 16), 0);
