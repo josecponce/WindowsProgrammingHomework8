@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -268,6 +269,42 @@ namespace WindowsProgramingHomework8 {
         private void pasteToolStripMenuItem_Click(object sender, EventArgs e) {
             Random random = new Random(DateTime.Now.Millisecond);
             AddText(Clipboard.GetText(), new Point(random.Next(textPanel.Width - 50), random.Next(textPanel.Height - 50)));
+        }
+
+        private void saveAsImageToolStripMenuItem_Click(object sender, EventArgs e) {
+            using(SaveFileDialog saveFileDialog = new SaveFileDialog()) {
+                saveFileDialog.AddExtension = true;
+                saveFileDialog.Filter = "Portable Network Graphics (*.png)|*.png" +
+                    "|Bitmap File (*.bmp)|*.bmp" +
+                    "|Joint Photographic Experts Group File (*.jpg)|*.jpg";
+                if (saveFileDialog.ShowDialog() != DialogResult.OK) {
+                    return;
+                }
+                Bitmap image = drawImage();
+                ImageFormat format = ImageFormat.Png;
+                string ext = saveFileDialog.FileName.Substring(
+                    saveFileDialog.FileName.LastIndexOf('.') + 1, 3);
+                switch (ext) {
+                    case "bmp":
+                        format = ImageFormat.Bmp;
+                        break;
+                    case "png":
+                        format = ImageFormat.Png;
+                        break;
+                    case "jpg":
+                        format = ImageFormat.Jpeg;
+                        break;
+                }
+                image.Save(saveFileDialog.FileName, format);
+            }
+        }
+        private Bitmap drawImage() {
+            Bitmap result = null;
+            using (Graphics panel = textPanel.CreateGraphics()) {
+                result = new Bitmap(textPanel.Width, textPanel.Height, panel);
+                textPanel.DrawToBitmap(result, new Rectangle(0, 0, textPanel.Width, textPanel.Height));
+            }
+            return result;
         }
     }
 }
