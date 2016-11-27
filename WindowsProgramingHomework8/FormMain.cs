@@ -191,30 +191,14 @@ namespace WindowsProgramingHomework8
             MouseDownLocation = e.Location;
             Graphics f = this.CreateGraphics();
 
-            //calcualtes a rectable hitbox with the length of string , cooridnates and font type
             for (int i = 0; i < document.Texts.Count; i++)
             {
-                //get string  
-                String toDraw = document.Texts[i].TextToDraw;
-                //get Font:
-                var font = document.Texts[i].Font;
-
-                // Measure string.
-                SizeF stringSize = new SizeF();
-                stringSize = f.MeasureString(toDraw, font);
-                //rectangle dimensions:
-                Rectangle rec = new Rectangle((int)document.Texts[i].Location.X, 
-                    (int)document.Texts[i].Location.Y, (int)stringSize.Width, (int)stringSize.Height);
-
-                if (rec.Contains(e.X, e.Y))
-                {
-                    //MessageBox.Show("clicked inside: "+ i);
+                if (Intersects(MouseDownLocation, document.Texts[i], f))
+                {                    
                     StringindexToMove = i;
                 }
-
             }
-
-        }//end mouseDown
+        }
 
         private void TextPanel_MouseUp(object sender, MouseEventArgs e)
         {
