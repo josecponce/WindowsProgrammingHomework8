@@ -123,7 +123,7 @@
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
             this.pasteToolStripMenuItem.Text = "Paste";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
             // 
@@ -172,6 +172,7 @@
             // 
             // textPanel
             // 
+            this.textPanel.AllowDrop = true;
             this.textPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textPanel.Location = new System.Drawing.Point(0, 28);
             this.textPanel.Name = "textPanel";

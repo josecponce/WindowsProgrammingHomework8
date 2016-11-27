@@ -176,11 +176,8 @@ namespace WindowsProgramingHomework8 {
         }
 
         private void TextPanel_DragDrop(object sender, DragEventArgs e) {
-            string stringData = e.Data.GetData(typeof(string)) as string;
-            Text t = new Text(stringData, this.PointToClient(new Point(e.X, e.Y)), new Font("Arial", 16), 0);
-            document.Texts.Add(t);
-
-            this.Refresh();
+            string stringData = e.Data.GetData(typeof(string)) as string;            
+            AddText(stringData, this.PointToClient(new Point(e.X, e.Y)));
         }
 
         private void oathToolStripMenuItem_Click(object sender, EventArgs e) {
