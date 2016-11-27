@@ -14,10 +14,12 @@ namespace WindowsProgramingHomework8.Repositories {
             List<Text> texts = new List<Text>();
 
             string[] allText = File.ReadAllLines(path);
+            int zOrder = 0;
             foreach (var line in allText) {
-                texts.AddRange(line.Split(' ', '\t')
-                    .Select((word) => new Text(
-                        word, new PointF(0,0), SystemFonts.DefaultFont,0)));
+                foreach (var word in line.Split(' ', '\t')) {
+                    texts.Add(new Text(
+                        word, new PointF(0, 0), SystemFonts.DefaultFont, 0, zOrder++));
+                }
             }
 
             TextsDocument doc = new TextsDocument() {

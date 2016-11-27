@@ -33,6 +33,7 @@
             System.Windows.Forms.Label locationLabel;
             System.Windows.Forms.Label rotationLabel;
             System.Windows.Forms.Label textToDrawLabel;
+            System.Windows.Forms.Label zOrderLabel;
             this.textsDocumentBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.textsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.textsComboBox = new System.Windows.Forms.ComboBox();
@@ -47,10 +48,14 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonChangeFont = new System.Windows.Forms.Button();
             this.buttonApply = new System.Windows.Forms.Button();
+            this.bringToFrontButton = new System.Windows.Forms.Button();
+            this.sendToBackButton = new System.Windows.Forms.Button();
+            this.zOrderTextBox = new System.Windows.Forms.TextBox();
             fontLabel = new System.Windows.Forms.Label();
             locationLabel = new System.Windows.Forms.Label();
             rotationLabel = new System.Windows.Forms.Label();
             textToDrawLabel = new System.Windows.Forms.Label();
+            zOrderLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.textsDocumentBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textsBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -91,6 +96,15 @@
             textToDrawLabel.TabIndex = 7;
             textToDrawLabel.Text = "Text:";
             // 
+            // zOrderLabel
+            // 
+            zOrderLabel.AutoSize = true;
+            zOrderLabel.Location = new System.Drawing.Point(20, 330);
+            zOrderLabel.Name = "zOrderLabel";
+            zOrderLabel.Size = new System.Drawing.Size(62, 17);
+            zOrderLabel.TabIndex = 31;
+            zOrderLabel.Text = "Z Order:";
+            // 
             // textsDocumentBindingSource
             // 
             this.textsDocumentBindingSource.DataSource = typeof(WindowsProgramingHomework8.Entities.TextsDocument);
@@ -115,7 +129,6 @@
             // 
             // fontTextBox
             // 
-            this.fontTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.textsBindingSource, "Font", true));
             this.fontTextBox.Location = new System.Drawing.Point(91, 114);
             this.fontTextBox.Name = "fontTextBox";
             this.fontTextBox.Size = new System.Drawing.Size(129, 22);
@@ -156,7 +169,6 @@
             // 
             // buttonPrevious
             // 
-            this.buttonPrevious.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonPrevious.Location = new System.Drawing.Point(238, 49);
             this.buttonPrevious.Name = "buttonPrevious";
             this.buttonPrevious.Size = new System.Drawing.Size(39, 24);
@@ -167,7 +179,6 @@
             // 
             // buttonNext
             // 
-            this.buttonNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonNext.Location = new System.Drawing.Point(283, 49);
             this.buttonNext.Name = "buttonNext";
             this.buttonNext.Size = new System.Drawing.Size(39, 24);
@@ -179,7 +190,7 @@
             // buttonOk
             // 
             this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOk.Location = new System.Drawing.Point(145, 319);
+            this.buttonOk.Location = new System.Drawing.Point(145, 422);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 33);
             this.buttonOk.TabIndex = 20;
@@ -191,7 +202,7 @@
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(247, 319);
+            this.buttonCancel.Location = new System.Drawing.Point(247, 422);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 33);
             this.buttonCancel.TabIndex = 21;
@@ -212,13 +223,43 @@
             // buttonApply
             // 
             this.buttonApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonApply.Location = new System.Drawing.Point(25, 319);
+            this.buttonApply.Location = new System.Drawing.Point(25, 422);
             this.buttonApply.Name = "buttonApply";
             this.buttonApply.Size = new System.Drawing.Size(75, 33);
             this.buttonApply.TabIndex = 28;
             this.buttonApply.Text = "Apply";
             this.buttonApply.UseVisualStyleBackColor = true;
             this.buttonApply.Click += new System.EventHandler(this.buttonApply_Click);
+            // 
+            // bringToFrontButton
+            // 
+            this.bringToFrontButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.bringToFrontButton.Location = new System.Drawing.Point(202, 300);
+            this.bringToFrontButton.Name = "bringToFrontButton";
+            this.bringToFrontButton.Size = new System.Drawing.Size(120, 33);
+            this.bringToFrontButton.TabIndex = 29;
+            this.bringToFrontButton.Text = "Bring To Front";
+            this.bringToFrontButton.UseVisualStyleBackColor = true;
+            this.bringToFrontButton.Click += new System.EventHandler(this.bringToFrontButton_Click);
+            // 
+            // sendToBackButton
+            // 
+            this.sendToBackButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.sendToBackButton.Location = new System.Drawing.Point(202, 355);
+            this.sendToBackButton.Name = "sendToBackButton";
+            this.sendToBackButton.Size = new System.Drawing.Size(120, 33);
+            this.sendToBackButton.TabIndex = 30;
+            this.sendToBackButton.Text = "Send To Back";
+            this.sendToBackButton.UseVisualStyleBackColor = true;
+            this.sendToBackButton.Click += new System.EventHandler(this.sendToBackButton_Click);
+            // 
+            // zOrderTextBox
+            // 
+            this.zOrderTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.textsBindingSource, "ZOrder", true));
+            this.zOrderTextBox.Location = new System.Drawing.Point(91, 327);
+            this.zOrderTextBox.Name = "zOrderTextBox";
+            this.zOrderTextBox.Size = new System.Drawing.Size(84, 22);
+            this.zOrderTextBox.TabIndex = 32;
             // 
             // TextOptionsDialog
             // 
@@ -227,7 +268,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(349, 379);
+            this.ClientSize = new System.Drawing.Size(349, 482);
+            this.Controls.Add(zOrderLabel);
+            this.Controls.Add(this.zOrderTextBox);
+            this.Controls.Add(this.sendToBackButton);
+            this.Controls.Add(this.bringToFrontButton);
             this.Controls.Add(this.buttonApply);
             this.Controls.Add(this.buttonChangeFont);
             this.Controls.Add(this.buttonCancel);
@@ -246,6 +291,7 @@
             this.Controls.Add(this.textsComboBox);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(367, 426);
             this.Name = "TextOptionsDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Text Options";
@@ -272,5 +318,8 @@
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonChangeFont;
         private System.Windows.Forms.Button buttonApply;
+        private System.Windows.Forms.Button bringToFrontButton;
+        private System.Windows.Forms.Button sendToBackButton;
+        private System.Windows.Forms.TextBox zOrderTextBox;
     }
 }

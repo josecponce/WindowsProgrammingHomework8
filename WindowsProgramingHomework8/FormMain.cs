@@ -3,6 +3,7 @@ using Homework7.Dialogs;
 using Microsoft.Practices.Unity;
 using SingleInstanceApplicationLib;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -93,13 +94,15 @@ namespace WindowsProgramingHomework8 {
                 }
             }
 
+            List<Text> zorderedTexts = new List<Text>(document.Texts);
+            zorderedTexts.Sort((one, two) => (one.ZOrder < two.ZOrder) ? -1 : 1);
             for (int i = 0; i < numberOfItems; i++) {
                 //location:
                 if (isFromDoc) {
                     if (i != 0) {
-                        var fontType = document.Texts.ElementAt(i - 1).Font;
-                        SizeF wordSize = g.MeasureString(document.Texts.ElementAt(i - 1).TextToDraw, fontType);
-                        SizeF currentWordSize = g.MeasureString(document.Texts.ElementAt(i - 1).TextToDraw, fontType);
+                        var fontType = zorderedTexts[i - 1].Font;
+                        SizeF wordSize = g.MeasureString(zorderedTexts[i - 1].TextToDraw, fontType);
+                        SizeF currentWordSize = g.MeasureString(zorderedTexts[i - 1].TextToDraw, fontType);
 
                         x = x + wordSize.Width + 1;
                         y = lineCount;
@@ -111,26 +114,25 @@ namespace WindowsProgramingHomework8 {
                         }
                     }
                 } else {
-
-                    x = document.Texts.ElementAt(i).Location.X;
-                    y = document.Texts.ElementAt(i).Location.Y;
+                    x = zorderedTexts[i].Location.X;
+                    y = zorderedTexts[i].Location.Y;
                 }
-                document.Texts.ElementAt(i).Location = new PointF(x, y);
+                zorderedTexts[i].Location = new PointF(x, y);
                 //size:
-                float size = document.Texts.ElementAt(i).Font.Size;
+                float size = zorderedTexts[i].Font.Size;
 
                 //Font:
-                var font = document.Texts.ElementAt(i).Font;
+                var font = zorderedTexts[i].Font;
 
                 //text that will be displayed:
                 string toDraw = "test draw";
-                toDraw = document.Texts.ElementAt(i).TextToDraw;
+                toDraw = zorderedTexts[i].TextToDraw;
 
                 //color:
                 Brush brush = new SolidBrush(Color.Black);
 
-                float rotation = (float)document.Texts.ElementAt(i).Rotation;
-                SizeF textSize = g.MeasureString(document.Texts.ElementAt(i).TextToDraw, font);
+                float rotation = (float)zorderedTexts[i].Rotation;
+                SizeF textSize = g.MeasureString(zorderedTexts[i].TextToDraw, font);
 
                 //move rotation point to center of image
                 g.TranslateTransform(textSize.Width / 2 + x, textSize.Height / 2 + y);
@@ -254,7 +256,7 @@ namespace WindowsProgramingHomework8 {
                         x = 0;//start at the beginning of a new line
                         y += (int)(font.GetHeight() + 1);//rounding up
                     }
-                    Text t = new Text(words[i], new PointF(x, y), font, 0);
+                    Text t = new Text(words[i], new PointF(x, y), font, 0, document.NextZOrder());
                     document.Texts.Add(t);
 
                     x += size.Width + 10;//10 is just some padding

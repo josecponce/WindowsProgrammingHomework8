@@ -15,6 +15,7 @@ namespace WindowsProgramingHomework8.Entities
         private PointF location;
         private Font font;
         private double rotation;
+        private int zOrder;
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnChange(string propName)
@@ -23,26 +24,33 @@ namespace WindowsProgramingHomework8.Entities
                 (this, new PropertyChangedEventArgs(propName));
         }
 
-        public Text(string text, PointF location, Font font, double rotation)
+        public Text(string text, PointF location, Font font, double rotation, int zOrder)
         {
             this.textToDraw = text;
             this.location = location;
             this.font = font;
             this.rotation = rotation;
+            this.zOrder = zOrder;
         }
-
+        public int ZOrder {
+            get {
+                return zOrder;
+            }
+            set {
+                zOrder = value;
+                OnChange(nameof(ZOrder));
+            }
+        }
         public string TextToDraw
         {
             get
             {
                 return textToDraw;
             }
-
             set
             {
                 textToDraw = value;
                 OnChange(nameof(TextToDraw));
-
             }
         }
 

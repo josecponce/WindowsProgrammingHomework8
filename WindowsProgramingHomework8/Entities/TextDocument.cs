@@ -32,6 +32,9 @@ namespace WindowsProgramingHomework8.Entities
             text.PropertyChanged -= Text_PropertyChanged;
             Dirty = true;
         }
+        public int NextZOrder() {
+            return (Texts.Count == 0) ? 0 : Texts.Max((text) => text.ZOrder) + 1;
+        }
 
        
         private void Text_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
