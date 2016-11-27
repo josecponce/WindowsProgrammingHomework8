@@ -30,6 +30,7 @@
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,7 +41,7 @@
             this.oathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textPanel = new System.Windows.Forms.Panel();
-            this.saveAsImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.imageEditViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,7 +54,8 @@
             this.searchToolStripMenuItem,
             this.textOptionsToolStripMenuItem,
             this.windowsToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.helpToolStripMenuItem,
+            this.imageEditViewToolStripMenuItem});
             this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.mainMenuStrip.Name = "mainMenuStrip";
             this.mainMenuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
@@ -106,6 +108,13 @@
             this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.saveAsToolStripMenuItem.Text = "Save As";
             // 
+            // saveAsImageToolStripMenuItem
+            // 
+            this.saveAsImageToolStripMenuItem.Name = "saveAsImageToolStripMenuItem";
+            this.saveAsImageToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.saveAsImageToolStripMenuItem.Text = "Save As Image";
+            this.saveAsImageToolStripMenuItem.Click += new System.EventHandler(this.saveAsImageToolStripMenuItem_Click);
+            // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
@@ -125,7 +134,7 @@
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
             this.pasteToolStripMenuItem.Text = "Paste";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
             // 
@@ -188,12 +197,12 @@
             this.textPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TextPanel_MouseDown);
             this.textPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TextPanel_MouseUp);
             // 
-            // saveAsImageToolStripMenuItem
+            // imageEditViewToolStripMenuItem
             // 
-            this.saveAsImageToolStripMenuItem.Name = "saveAsImageToolStripMenuItem";
-            this.saveAsImageToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
-            this.saveAsImageToolStripMenuItem.Text = "Save As Image";
-            this.saveAsImageToolStripMenuItem.Click += new System.EventHandler(this.saveAsImageToolStripMenuItem_Click);
+            this.imageEditViewToolStripMenuItem.Name = "imageEditViewToolStripMenuItem";
+            this.imageEditViewToolStripMenuItem.Size = new System.Drawing.Size(129, 24);
+            this.imageEditViewToolStripMenuItem.Text = "Image Edit View";
+            this.imageEditViewToolStripMenuItem.Click += new System.EventHandler(this.imageEditViewToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -234,6 +243,7 @@
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsImageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem imageEditViewToolStripMenuItem;
     }
 }
 

@@ -63,6 +63,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dialogs\ImageEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ImageEditForm.Designer.cs">
+      <DependentUpon>ImageEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\SearchDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +96,9 @@
     <Compile Include="Repositories\HTMLRepository.cs" />
     <Compile Include="Repositories\TxtRepository.cs" />
     <Compile Include="UnityConfig.cs" />
+    <EmbeddedResource Include="Dialogs\ImageEditForm.resx">
+      <DependentUpon>ImageEditForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\SearchDialog.resx">
       <DependentUpon>SearchDialog.cs</DependentUpon>
     </EmbeddedResource>

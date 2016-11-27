@@ -296,6 +296,7 @@ namespace WindowsProgramingHomework8 {
                         break;
                 }
                 image.Save(saveFileDialog.FileName, format);
+                image.Dispose();
             }
         }
         private Bitmap drawImage() {
@@ -305,6 +306,20 @@ namespace WindowsProgramingHomework8 {
                 textPanel.DrawToBitmap(result, new Rectangle(0, 0, textPanel.Width, textPanel.Height));
             }
             return result;
+        }
+
+        private void imageEditViewToolStripMenuItem_Click(object sender, EventArgs e) {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog()) {
+                openFileDialog.AddExtension = true;
+                openFileDialog.Filter = "Portable Network Graphics (*.png)|*.png" +
+                    "|Bitmap File (*.bmp)|*.bmp" +
+                    "|Joint Photographic Experts Group File (*.jpg)|*.jpg";
+                if (openFileDialog.ShowDialog() != DialogResult.OK) {
+                    return;
+                }
+                ImageEditForm form = new ImageEditForm(openFileDialog.FileName);
+                form.ShowDialog(this);
+            }
         }
     }
 }
