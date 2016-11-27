@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,9 +55,10 @@ namespace WindowsProgramingHomework8
             {
                 return;
             }
-            TextOptionsDialog pForm = new TextOptionsDialog(this.document);
-            pForm.Show(this);
+            TextOptionsDialog = new TextOptionsDialog(this.document);
+            TextOptionsDialog.Show(this);
         }
+        private TextOptionsDialog TextOptionsDialog;
 
 
         private void searchToolStripMenuItem_Click(object sender, EventArgs e)
@@ -126,16 +128,15 @@ namespace WindowsProgramingHomework8
                             x = 0;
                             y = lineCount;
                         }
-                    }
-                    document.Texts.ElementAt(i).Location = new PointF(x,y);
+                    }                    
                 }
                 else
                 {
                     
                     x = document.Texts.ElementAt(i).Location.X;
-                    y = document.Texts.ElementAt(i).Location.Y + 30;
+                    y = document.Texts.ElementAt(i).Location.Y;
                 }
-
+                document.Texts.ElementAt(i).Location = new PointF(x, y);
                 //size:
                 float size = document.Texts.ElementAt(i).Font.Size;
 
@@ -182,26 +183,28 @@ namespace WindowsProgramingHomework8
 
 
         int StringindexToMove = -1;
+        Point MouseDownLocation = Point.Empty;
 
         //on key down move the string, get all rectanges from strings and see if the click is inside any of them
         private void TextPanel_MouseDown(object sender, MouseEventArgs e)
         {
-
+            MouseDownLocation = e.Location;
             Graphics f = this.CreateGraphics();
 
             //calcualtes a rectable hitbox with the length of string , cooridnates and font type
             for (int i = 0; i < document.Texts.Count; i++)
             {
                 //get string  
-                String toDraw = document.Texts.ElementAt(i).TextToDraw;
+                String toDraw = document.Texts[i].TextToDraw;
                 //get Font:
-                var font = document.Texts.ElementAt(i).Font;
+                var font = document.Texts[i].Font;
 
                 // Measure string.
                 SizeF stringSize = new SizeF();
                 stringSize = f.MeasureString(toDraw, font);
                 //rectangle dimensions:
-                Rectangle rec = new Rectangle((int)document.Texts.ElementAt(i).Location.X, (int)document.Texts.ElementAt(i).Location.Y, (int)stringSize.Width, (int)stringSize.Height);
+                Rectangle rec = new Rectangle((int)document.Texts[i].Location.X, 
+                    (int)document.Texts[i].Location.Y, (int)stringSize.Width, (int)stringSize.Height);
 
                 if (rec.Contains(e.X, e.Y))
                 {
@@ -215,6 +218,9 @@ namespace WindowsProgramingHomework8
 
         private void TextPanel_MouseUp(object sender, MouseEventArgs e)
         {
+            if (MouseDownLocation == e.Location) {
+                return;//the mouse did not move so why move the text?
+            }
             if (StringindexToMove != -1)
             {
                 document.Texts.ElementAt(StringindexToMove).Location = new PointF(e.X, e.Y);
@@ -222,8 +228,6 @@ namespace WindowsProgramingHomework8
                 this.Refresh();
                 StringindexToMove = -1;
             }
-
-
         }
 
         private void TextPanel_DragEnter(object sender, DragEventArgs e)
@@ -272,6 +276,31 @@ namespace WindowsProgramingHomework8
         private void AboutDialog_FormClosed(object sender, FormClosedEventArgs e)
         {
             aboutDialog = null;
+        }
+
+        private void textPanel_MouseClick(object sender, MouseEventArgs e) {
+            if (e.Button != MouseButtons.Right) return;
+            Point Location = e.Location;
+            Graphics g = textPanel.CreateGraphics();
+            foreach (var text in document.Texts) {
+                if (Intersects(Location, text, g)) {
+                    textOptionsToolStripMenuItem_Click(null, null);
+                    TextOptionsDialog.ChangeSelected(text);
+                }
+            }
+        }
+
+        private bool Intersects(Point p, Text text, Graphics g) {
+            SizeF textSize = g.MeasureString(text.TextToDraw, text.Font);
+
+            g.TranslateTransform(textSize.Width / 2 + text.Location.X, textSize.Height / 2 + text.Location.Y);
+            g.RotateTransform((float)text.Rotation);
+            Point[] points = new[] { p };
+            g.TransformPoints(CoordinateSpace.World, CoordinateSpace.Page,
+                points);
+            g.ResetTransform();
+
+            return new RectangleF(new PointF(-(textSize.Width / 2), -(textSize.Height / 2)), textSize).Contains(points[0]);
         }
     }
 }

@@ -24,7 +24,7 @@ namespace WindowsProgramingHomework8.Dialogs
             int pos = BindingManager.Position;
             if (pos != -1)
             {
-                WindowsProgramingHomework8.Entities.Text txt = this.textsComboBox.Items[BindingManager.Position] as WindowsProgramingHomework8.Entities.Text;
+                Text txt = this.textsComboBox.Items[BindingManager.Position] as Text;
                 fontSize = txt.Font.Size;
             }
             RefreshItems();
@@ -85,6 +85,16 @@ namespace WindowsProgramingHomework8.Dialogs
             this.buttonPrevious.Enabled = (pos > 1);
             this.buttonNext.Enabled = (pos < count);
             textsComboBox.SelectedIndex = pos - 1;
+        }
+        public void ChangeSelected(Text newSelection) {
+            int pos = 0;
+            for (int i = 0; i < document.Texts.Count; i++) {
+                if (newSelection == document.Texts[i]) {
+                    pos = i;
+                }
+            }
+            BindingManager.Position = pos;
+            RefreshItems();
         }
 
         private void textsComboBox_SelectedIndexChanged(object sender, EventArgs e)

@@ -160,6 +160,7 @@
             this.textPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.TextPanel_DragDrop);
             this.textPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.TextPanel_DragEnter);
             this.textPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.TextPanel_Paint);
+            this.textPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textPanel_MouseClick);
             this.textPanel.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TextPanel_MouseDoubleClick);
             this.textPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TextPanel_MouseDown);
             this.textPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TextPanel_MouseUp);
