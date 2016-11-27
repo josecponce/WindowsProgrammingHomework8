@@ -23,7 +23,7 @@ namespace WindowsProgramingHomework8.Dialogs {
                 Text txt = this.textsComboBox.Items[BindingManager.Position] as Text;
                 fontSize = txt.Font.Size;
             }
-            textsComboBox.SelectedIndex = (this.BindingManager.Position == -1) ? 0 : this.BindingManager.Position;
+            textsComboBox.SelectedIndex = this.BindingManager.Position;
             RefreshItems();
         }
 
