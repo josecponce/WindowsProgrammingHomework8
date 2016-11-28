@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsProgramingHomework8.Entities;
 
+
 namespace Homework10 {
     public class Printer : IDisposable {
 
@@ -13,6 +14,7 @@ namespace Homework10 {
         private PrintDialog printDialog;
         private PrintDocument pd;
         Form parent;
+        int pageNumber;
 
         public Printer(TextsDocument document, Form parent) {
             this.document = document;
@@ -23,16 +25,33 @@ namespace Homework10 {
             pd = new PrintDocument();
             printDialog.Document = pd;
             printDialog.UseEXDialog = true;
+            pageNumber = 1;
 
 
             // Add a PrintPageEventHandler for the document 
             pd.PrintPage += pd_PrintPage;
+
+            
         }
 
-        private void pd_PrintPage(object sender, PrintPageEventArgs ev) {
-
-          
+        private void pd_PrintPage(object sender, PrintPageEventArgs ev)
+        {          
             Graphics g = ev.Graphics;
+            Rectangle rec = ev.MarginBounds;
+
+
+            g.DrawString("Group 2", new Font("Times New Roman", 8), new SolidBrush(Color.Black), new Point(100, 50));
+            string h = "Homework Assignment 10";
+            var m = g.MeasureString(h, new Font("Times New Roman", 8));
+            g.DrawString(h, new Font("Times New Roman", 8), new SolidBrush(Color.Black), new Point(rec.Width + 100 - (int)m.Width, 50));
+            g.DrawLine(new Pen(Color.Black), new Point(100, 80), new Point(rec.Width + 100, 80));
+            g.DrawLine(new Pen(Color.Black), new Point(100, rec.Height + 120), new Point(rec.Width + 100, rec.Height + 120));
+            DateTime date = DateTime.Today;
+            g.DrawString(date.ToShortDateString(), new Font("Times New Roman", 8), new SolidBrush(Color.Black), new Point(100, rec.Height + 150));
+            g.DrawString(pageNumber.ToString(), new Font("Times New Roman", 8), new SolidBrush(Color.Black), new Point(rec.Width/2 + 100, rec.Height + 150));
+
+
+
             int numberOfItems = document.Texts.Count;
 
             float x = 0;
@@ -44,7 +63,7 @@ namespace Homework10 {
             for (int i = 0; i < numberOfItems; i++)
             {
                 x = zorderedTexts[i].Location.X;
-                y = zorderedTexts[i].Location.Y;
+                y = zorderedTexts[i].Location.Y + 100;
                 
                 zorderedTexts[i].Location = new PointF(x, y);
                 //size:
@@ -67,7 +86,8 @@ namespace Homework10 {
                 g.TranslateTransform(textSize.Width / 2 + x, textSize.Height / 2 + y);
                 //rotate
                 g.RotateTransform(rotation);
-                //move image back
+
+               
                 g.DrawString(toDraw, font, brush, -(textSize.Width / 2), -(textSize.Height / 2));
                 g.ResetTransform();
 
@@ -93,9 +113,10 @@ namespace Homework10 {
             //    // Create Rectangle structure, used to set the position of the chart Rectangle 
             //    //var myRec = new Rectangle(100, 100, chart.Bounds.Right, chart.Bounds.Bottom);
             //    //chart.Printing.PrintPaint(ev.Graphics, myRec);
-        //} catch (Exception e) {
-        //        Console.WriteLine(e.Message);
-        //    }
+            //} catch (Exception e) {
+            //        Console.WriteLine(e.Message);
+            //    }
+            pageNumber++;
         }
 
         public void ShowDialog() {
