@@ -295,6 +295,7 @@
             this.Name = "TextOptionsDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Text Options";
+            this.Load += new System.EventHandler(this.form_Load);
             ((System.ComponentModel.ISupportInitialize)(this.textsDocumentBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textsBindingSource)).EndInit();
             this.ResumeLayout(false);

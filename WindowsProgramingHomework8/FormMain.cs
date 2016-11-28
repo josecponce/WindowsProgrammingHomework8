@@ -51,15 +51,11 @@ namespace WindowsProgramingHomework8 {
                 return;
             }
             TextOptionsDialog = new TextOptionsDialog(this.document);
-            //HighlightText(this.document.Texts[0]);
             TextOptionsDialog.Show(this);
 
         }
 
-        private void HighlightText(Text text)
-        {
-        }
-
+    
         private TextOptionsDialog TextOptionsDialog;
 
 

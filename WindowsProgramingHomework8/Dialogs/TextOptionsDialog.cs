@@ -22,10 +22,12 @@ namespace WindowsProgramingHomework8.Dialogs {
             if (pos != -1) {
                 Text txt = this.textsComboBox.Items[BindingManager.Position] as Text;
                 fontSize = txt.Font.Size;
+
             }
             textsComboBox.SelectedIndex = this.BindingManager.Position;
             RefreshItems();
         }
+   
 
         private void buttonChangeFont_Click(object sender, EventArgs e) {
             using (FontDialog dlg = new FontDialog()) {
@@ -164,6 +166,12 @@ namespace WindowsProgramingHomework8.Dialogs {
 
         private void sendToBackButton_Click(object sender, EventArgs e) {
             document.Texts[textsComboBox.SelectedIndex].ZOrder = document.NextZOrder();
+            this.Owner.Refresh();
+        }
+
+        private void form_Load(object sender, EventArgs e)
+        {
+            document.Texts.ElementAt(textsComboBox.SelectedIndex).Highlighted = true;
             this.Owner.Refresh();
         }
     }
