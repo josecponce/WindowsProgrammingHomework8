@@ -18,7 +18,7 @@ namespace WindowsProgramingHomework8.Repositories {
             foreach (var line in allText) {
                 foreach (var word in line.Split(' ', '\t')) {
                     texts.Add(new Text(
-                        word, new PointF(0, 0), SystemFonts.DefaultFont, 0, zOrder++));
+                        word, new PointF(0, 0), SystemFonts.DefaultFont, 0, zOrder++, false));
                 }
             }
 

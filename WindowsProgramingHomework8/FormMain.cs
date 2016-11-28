@@ -51,8 +51,15 @@ namespace WindowsProgramingHomework8 {
                 return;
             }
             TextOptionsDialog = new TextOptionsDialog(this.document);
+            //HighlightText(this.document.Texts[0]);
             TextOptionsDialog.Show(this);
+
         }
+
+        private void HighlightText(Text text)
+        {
+        }
+
         private TextOptionsDialog TextOptionsDialog;
 
 
@@ -135,6 +142,15 @@ namespace WindowsProgramingHomework8 {
                 float rotation = (float)zorderedTexts[i].Rotation;
                 SizeF textSize = g.MeasureString(zorderedTexts[i].TextToDraw, font);
 
+                if(zorderedTexts[i].Highlighted)
+                {
+                    var rectangle = new RectangleF(zorderedTexts[i].Location.X, zorderedTexts[i].Location.Y, textSize.Width, textSize.Height);
+
+                    //Filling a rectangle before drawing the string.
+                    g.FillRectangle(Brushes.Yellow, rectangle);
+
+                }
+
                 //move rotation point to center of image
                 g.TranslateTransform(textSize.Width / 2 + x, textSize.Height / 2 + y);
                 //rotate
@@ -142,6 +158,10 @@ namespace WindowsProgramingHomework8 {
                 //move image back
                 g.DrawString(toDraw, font, brush, -(textSize.Width / 2), -(textSize.Height / 2));
                 g.ResetTransform();
+
+
+
+           
             }//end forloop
         }
       
@@ -257,7 +277,7 @@ namespace WindowsProgramingHomework8 {
                         x = 0;//start at the beginning of a new line
                         y += (int)(font.GetHeight() + 1);//rounding up
                     }
-                    Text t = new Text(words[i], new PointF(x, y), font, 0, document.NextZOrder());
+                    Text t = new Text(words[i], new PointF(x, y), font, 0, document.NextZOrder(), false);
                     document.Texts.Add(t);
 
                     x += size.Width + 10;//10 is just some padding

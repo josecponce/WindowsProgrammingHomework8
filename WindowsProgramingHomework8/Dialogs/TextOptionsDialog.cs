@@ -79,9 +79,19 @@ namespace WindowsProgramingHomework8.Dialogs {
         }
 
         private void textsComboBox_SelectedIndexChanged(object sender, EventArgs e) {
+            
+            if (BindingManager.Position != textsComboBox.SelectedIndex)
+            {
+                int lastI = BindingManager.Position;
+                int newI = textsComboBox.SelectedIndex;
+
+                onTextsIndexChange(lastI, newI);                
+            }
+
             BindingManager.Position = textsComboBox.SelectedIndex;
-            //document.Texts[binding]
             RefreshItems();
+            //this.Owner.Refresh();
+
         }
         BindingManagerBase BindingManager {
             get { return this.BindingContext[this.document.Texts]; }
@@ -126,6 +136,19 @@ namespace WindowsProgramingHomework8.Dialogs {
             document.Texts.ElementAt(textsComboBox.SelectedIndex).Rotation = rot;
             document.Texts.ElementAt(textsComboBox.SelectedIndex).TextToDraw = textToDrawTextBox.Text;
             document.Texts.ElementAt(textsComboBox.SelectedIndex).ZOrder = zOrder;
+        }
+        public void onTextsIndexChange(int lastI, int newI)
+        {
+            
+            if (document.Texts.ElementAt(lastI).Highlighted == true)
+            {
+                document.Texts.ElementAt(lastI).Highlighted = false;
+            }
+            if (newI > -1)
+            {
+                document.Texts.ElementAt(newI).Highlighted = true;
+            }
+            this.Owner.Refresh();
         }
 
         private void bringToFrontButton_Click(object sender, EventArgs e) {
