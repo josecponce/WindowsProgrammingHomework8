@@ -42,6 +42,7 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageEditViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textPanel = new System.Windows.Forms.Panel();
+            this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,8 +55,9 @@
             this.searchToolStripMenuItem,
             this.textOptionsToolStripMenuItem,
             this.windowsToolStripMenuItem,
-            this.helpToolStripMenuItem,
-            this.imageEditViewToolStripMenuItem});
+            this.imageEditViewToolStripMenuItem,
+            this.printToolStripMenuItem,
+            this.helpToolStripMenuItem});
             this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.mainMenuStrip.Name = "mainMenuStrip";
             this.mainMenuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
@@ -171,14 +173,14 @@
             // oathToolStripMenuItem
             // 
             this.oathToolStripMenuItem.Name = "oathToolStripMenuItem";
-            this.oathToolStripMenuItem.Size = new System.Drawing.Size(125, 26);
+            this.oathToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.oathToolStripMenuItem.Text = "Oath";
             this.oathToolStripMenuItem.Click += new System.EventHandler(this.oathToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(125, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -204,6 +206,13 @@
             this.textPanel.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TextPanel_MouseDoubleClick);
             this.textPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TextPanel_MouseDown);
             this.textPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TextPanel_MouseUp);
+            // 
+            // printToolStripMenuItem
+            // 
+            this.printToolStripMenuItem.Name = "printToolStripMenuItem";
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(51, 24);
+            this.printToolStripMenuItem.Text = "Print";
+            this.printToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -245,6 +254,7 @@
         private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsImageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem imageEditViewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem;
     }
 }
 

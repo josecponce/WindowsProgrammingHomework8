@@ -1,4 +1,5 @@
-﻿using Homework3ControlLib;
+﻿using Homework10;
+using Homework3ControlLib;
 using Homework7.Dialogs;
 using Microsoft.Practices.Unity;
 using SingleInstanceApplicationLib;
@@ -350,6 +351,14 @@ namespace WindowsProgramingHomework8 {
          
             AddText(input, loc);
            
+        }
+
+        private void printToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (Printer p = new Printer(document, this))
+            {
+                p.ShowDialog();
+            }
         }
     }
 }
