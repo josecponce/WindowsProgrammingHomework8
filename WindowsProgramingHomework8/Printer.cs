@@ -21,6 +21,7 @@ namespace Homework10 {
             this.document = document;
             this.parent = parent;
             printDialog = new PrintDialog();
+            //printDialog.AllowSomePages = true;
 
             // Create new PrintDocument 
             pd = new PrintDocument();
@@ -42,6 +43,11 @@ namespace Homework10 {
             Rectangle rec = ev.MarginBounds;
             var font = new Font("Times New Roman", 8);
 
+            //if(ev.PageSettings.PrinterSettings.FromPage != 0)
+            //{
+
+            //}
+
 
             g.DrawString("Group 2", font, new SolidBrush(Color.Black), new Point(100, 50));
             string h = "Homework Assignment 10";
@@ -55,7 +61,7 @@ namespace Homework10 {
 
             int col = 0;
             int row = 0;
-            font = new Font("Times New Roman", 14);
+            font = new Font("Times New Roman", 12);
             g.DrawString("Text", font, new SolidBrush(Color.Black), new Point((rec.Width / 5) * col++ + 100, 110));
             g.DrawString("Font", font, new SolidBrush(Color.Black), new Point((rec.Width / 5) * col++ + 100, 110));
             g.DrawString("Location", font, new SolidBrush(Color.Black), new Point((rec.Width / 5) * col++ + 100, 110));
@@ -68,7 +74,7 @@ namespace Homework10 {
             int numberOfItems = document.Texts.Count;
 
             float x = 100;
-            float y = 100 + mes.Height + 5;            
+            float y = 100 + mes.Height + 10;            
 
             List<Text> zorderedTexts = new List<Text>(document.Texts);
             font = new Font("Times New Roman", 8);
@@ -113,7 +119,7 @@ namespace Homework10 {
                     {
                         ev.HasMorePages = true;
                         y = 0;
-                        lastIndex = i;
+                        lastIndex = i+1;
                         pageNumber++;
                         return; // you need to return, then it will go into this function again
                     }
