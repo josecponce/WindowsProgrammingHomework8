@@ -80,6 +80,7 @@ namespace WindowsProgramingHomework8.Dialogs {
 
         private void textsComboBox_SelectedIndexChanged(object sender, EventArgs e) {
             BindingManager.Position = textsComboBox.SelectedIndex;
+            //document.Texts[binding]
             RefreshItems();
         }
         BindingManagerBase BindingManager {

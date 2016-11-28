@@ -245,10 +245,10 @@ namespace WindowsProgramingHomework8 {
             AddText(input, e.Location);
 
         }
-        private void AddText(string text, Point p) {
+        private void AddText(string text, PointF p) {
             string[] words = text.Split(' ');
-            int x = p.X;
-            int y = p.Y;
+            float x = p.X;
+            float y = p.Y;
             using (Graphics g = this.CreateGraphics()) {
                 for (int i = 0; i < words.Length; i++) {
                     Font font = new Font("Arial", 16);
@@ -320,6 +320,20 @@ namespace WindowsProgramingHomework8 {
                 ImageEditForm form = new ImageEditForm(openFileDialog.FileName);
                 form.ShowDialog(this);
             }
+        }
+
+        private void newTextToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            string input = Microsoft.VisualBasic.Interaction.InputBox("Enter a Word to draw",
+                        "Enter a Word to draw",
+                        "Default",
+                        20,
+                        20);
+            PointF loc = new PointF(20, 20);
+         
+            AddText(input, loc);
+           
         }
     }
 }

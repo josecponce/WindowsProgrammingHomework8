@@ -40,8 +40,8 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.textPanel = new System.Windows.Forms.Panel();
             this.imageEditViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textPanel = new System.Windows.Forms.Panel();
             this.mainMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -89,6 +89,7 @@
             this.newTextToolStripMenuItem.Name = "newTextToolStripMenuItem";
             this.newTextToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.newTextToolStripMenuItem.Text = "New Text";
+            this.newTextToolStripMenuItem.Click += new System.EventHandler(this.newTextToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
@@ -181,6 +182,13 @@
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // imageEditViewToolStripMenuItem
+            // 
+            this.imageEditViewToolStripMenuItem.Name = "imageEditViewToolStripMenuItem";
+            this.imageEditViewToolStripMenuItem.Size = new System.Drawing.Size(129, 24);
+            this.imageEditViewToolStripMenuItem.Text = "Image Edit View";
+            this.imageEditViewToolStripMenuItem.Click += new System.EventHandler(this.imageEditViewToolStripMenuItem_Click);
+            // 
             // textPanel
             // 
             this.textPanel.AllowDrop = true;
@@ -196,13 +204,6 @@
             this.textPanel.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TextPanel_MouseDoubleClick);
             this.textPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TextPanel_MouseDown);
             this.textPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TextPanel_MouseUp);
-            // 
-            // imageEditViewToolStripMenuItem
-            // 
-            this.imageEditViewToolStripMenuItem.Name = "imageEditViewToolStripMenuItem";
-            this.imageEditViewToolStripMenuItem.Size = new System.Drawing.Size(129, 24);
-            this.imageEditViewToolStripMenuItem.Text = "Image Edit View";
-            this.imageEditViewToolStripMenuItem.Click += new System.EventHandler(this.imageEditViewToolStripMenuItem_Click);
             // 
             // FormMain
             // 
