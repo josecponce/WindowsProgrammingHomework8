@@ -10,71 +10,42 @@ namespace Homework10 {
     public class Printer : IDisposable {
 
         TextsDocument document;
-        private PrintPreviewDialog printPreviewDialog;
+        private PrintDialog printDialog;
         private PrintDocument pd;
         Form parent;
 
         public Printer(TextsDocument document, Form parent) {
             this.document = document;
             this.parent = parent;
-            printPreviewDialog = new PrintPreviewDialog();
+            printDialog = new PrintDialog();
 
             // Create new PrintDocument 
             pd = new PrintDocument();
-            printPreviewDialog.Document = pd;
+            printDialog.Document = pd;
+            printDialog.UseEXDialog = true;
+
 
             // Add a PrintPageEventHandler for the document 
             pd.PrintPage += pd_PrintPage;
         }
 
         private void pd_PrintPage(object sender, PrintPageEventArgs ev) {
+
+          
             Graphics g = ev.Graphics;
             int numberOfItems = document.Texts.Count;
 
-            bool isFromDoc = true;
             float x = 0;
             float y = 2;
             PointF def = new PointF(0, 0);
-            float lineCount = 0;
-
-            foreach (var item in document.Texts)
-            {
-                if (item.Location != def)
-                {
-                    isFromDoc = false;
-                    break;
-                }
-            }
 
             List<Text> zorderedTexts = new List<Text>(document.Texts);
             zorderedTexts.Sort((one, two) => (one.ZOrder < two.ZOrder) ? -1 : 1);
             for (int i = 0; i < numberOfItems; i++)
             {
-                //location:
-                if (isFromDoc)
-                {
-                    if (i != 0)
-                    {
-                        var fontType = zorderedTexts[i - 1].Font;
-                        SizeF wordSize = g.MeasureString(zorderedTexts[i - 1].TextToDraw, fontType);
-                        SizeF currentWordSize = g.MeasureString(zorderedTexts[i - 1].TextToDraw, fontType);
-
-                        x = x + wordSize.Width + 1;
-                        y = lineCount;
-
-                        if ((x + currentWordSize.Width + 2) > parent.ClientSize.Width)
-                        {
-                            lineCount = lineCount + wordSize.Height + 1;
-                            x = 0;
-                            y = lineCount;
-                        }
-                    }
-                }
-                else
-                {
-                    x = zorderedTexts[i].Location.X;
-                    y = zorderedTexts[i].Location.Y;
-                }
+                x = zorderedTexts[i].Location.X;
+                y = zorderedTexts[i].Location.Y;
+                
                 zorderedTexts[i].Location = new PointF(x, y);
                 //size:
                 float size = zorderedTexts[i].Font.Size;
@@ -92,15 +63,6 @@ namespace Homework10 {
                 float rotation = (float)zorderedTexts[i].Rotation;
                 SizeF textSize = g.MeasureString(zorderedTexts[i].TextToDraw, font);
 
-                if (zorderedTexts[i].Highlighted)
-                {
-                    var rectangle = new RectangleF(zorderedTexts[i].Location.X, zorderedTexts[i].Location.Y, textSize.Width, textSize.Height);
-
-                    //Filling a rectangle before drawing the string.
-                    g.FillRectangle(Brushes.Yellow, rectangle);
-
-                }
-
                 //move rotation point to center of image
                 g.TranslateTransform(textSize.Width / 2 + x, textSize.Height / 2 + y);
                 //rotate
@@ -108,9 +70,6 @@ namespace Homework10 {
                 //move image back
                 g.DrawString(toDraw, font, brush, -(textSize.Width / 2), -(textSize.Height / 2));
                 g.ResetTransform();
-
-
-
 
             }//end forloop
              //try {
@@ -140,7 +99,10 @@ namespace Homework10 {
         }
 
         public void ShowDialog() {
-            printPreviewDialog.ShowDialog();
+            if (DialogResult.OK == printDialog.ShowDialog())
+            {
+                pd.Print();
+            }
         }
 
         public void Dispose() {

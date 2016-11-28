@@ -37,12 +37,12 @@
             this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.imageEditViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.imageEditViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textPanel = new System.Windows.Forms.Panel();
-            this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -161,6 +161,20 @@
             this.windowsToolStripMenuItem.Size = new System.Drawing.Size(82, 24);
             this.windowsToolStripMenuItem.Text = "Windows";
             // 
+            // imageEditViewToolStripMenuItem
+            // 
+            this.imageEditViewToolStripMenuItem.Name = "imageEditViewToolStripMenuItem";
+            this.imageEditViewToolStripMenuItem.Size = new System.Drawing.Size(129, 24);
+            this.imageEditViewToolStripMenuItem.Text = "Image Edit View";
+            this.imageEditViewToolStripMenuItem.Click += new System.EventHandler(this.imageEditViewToolStripMenuItem_Click);
+            // 
+            // printToolStripMenuItem
+            // 
+            this.printToolStripMenuItem.Name = "printToolStripMenuItem";
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(51, 24);
+            this.printToolStripMenuItem.Text = "Print";
+            this.printToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -173,27 +187,21 @@
             // oathToolStripMenuItem
             // 
             this.oathToolStripMenuItem.Name = "oathToolStripMenuItem";
-            this.oathToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.oathToolStripMenuItem.Size = new System.Drawing.Size(125, 26);
             this.oathToolStripMenuItem.Text = "Oath";
             this.oathToolStripMenuItem.Click += new System.EventHandler(this.oathToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(125, 26);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // imageEditViewToolStripMenuItem
-            // 
-            this.imageEditViewToolStripMenuItem.Name = "imageEditViewToolStripMenuItem";
-            this.imageEditViewToolStripMenuItem.Size = new System.Drawing.Size(129, 24);
-            this.imageEditViewToolStripMenuItem.Text = "Image Edit View";
-            this.imageEditViewToolStripMenuItem.Click += new System.EventHandler(this.imageEditViewToolStripMenuItem_Click);
             // 
             // textPanel
             // 
             this.textPanel.AllowDrop = true;
+            this.textPanel.AutoScroll = true;
             this.textPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textPanel.Location = new System.Drawing.Point(0, 28);
             this.textPanel.Name = "textPanel";
@@ -206,13 +214,6 @@
             this.textPanel.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TextPanel_MouseDoubleClick);
             this.textPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TextPanel_MouseDown);
             this.textPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TextPanel_MouseUp);
-            // 
-            // printToolStripMenuItem
-            // 
-            this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(51, 24);
-            this.printToolStripMenuItem.Text = "Print";
-            this.printToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
             // 
             // FormMain
             // 

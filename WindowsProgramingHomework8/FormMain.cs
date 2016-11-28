@@ -358,6 +358,7 @@ namespace WindowsProgramingHomework8 {
             using (Printer p = new Printer(document, this))
             {
                 p.ShowDialog();
+
             }
         }
     }
